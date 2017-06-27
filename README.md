@@ -3,7 +3,7 @@
 
 # Packaged Web Publications
 
-This is the repository of the W3C’s specification on Packaged Web Publications, developed by the [Publishing Working Group](https://www.w3.org/publishing/groups/publ-wg/).
+This is the repository of the W3C’s specification on Packaged Web Publications, developed by the [Publishing Working Group](https://www.w3.org/publishing/groups/publ-wg/). The editors’ draft of the specification can also be [read directly](https://w3c.github.io/pwpub/).
 
 ## Contributing to the Repository
 
