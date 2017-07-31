@@ -17,9 +17,17 @@
 */
 
 var biblio = {
-   "PackagedWebPubs": {
+   "PackagedWebPub": {
       "title": "Packaged Web Publications",
-      "href": "https://w3.org/TR/pkgd-web-pub/",
+      "href": "https://w3.org/TR/pwpub/",
+      "authors": [
+        "..."
+      ],
+      "date": "..."
+   },
+   "WebPub": {
+      "title": "Web Publications",
+      "href": "https://w3.org/TR/wpub/",
       "authors": [
         "..."
       ],
