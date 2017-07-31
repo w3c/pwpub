@@ -1,0 +1,16 @@
+
+ul.ack > li {
+    display: inline;
+}
+
+ul.ack > li:after {
+    content: ', '
+}
+
+ul.ack > li:last-child:after {
+    content: ''
+}
+
+dfn {
+	font-weight: bold !important;
+}
