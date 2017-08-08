@@ -11,7 +11,7 @@
 				wg: "Publishing Working Group",
 				specStatus: "ED",
 				shortName: "pwpub",
-				edDraftURI: "https://w3c.github.io/pwpub/",
+				// edDraftURI: "https://w3c.github.io/pwpub/",
 				editors: [
 					/*
 					{
@@ -19,7 +19,7 @@
 						url: 'http://www.hbgusa.com',
 						company: "Hachette Livre",
 						companyURI: "http://www.hbgusa.com"//,
-						w3cid: ?
+						w3cid: 65283
 					},
 					*/
 					{
@@ -38,27 +38,32 @@
 				wgURI:             "https://www.w3.org/publishing/groups/publ-wg/",
 				wgPublicList:      "public-publ-wg",
 				wgPatentURI:       "https://www.w3.org/2004/01/pp-impl/100074/status",
-				otherLinks: [
-					{
-						key: "Repository",
-						data: [{
-							value: "Github Repository",
-							href: "https://github.com/w3c/pwpub"
-						}]
-					},
-					{
-						key: "Changes",
-						data: [
-						// {
-						//	 value: "Diff to previous version",
-						//	 href: "diff.html"
-						// },
-						{
-							value: "Commit history",
-							href: "https://github.com/w3c/pwpub/commits/master"
-						}]
-					}
-				],
+				github:			 {
+  				  repoURL: "https://github.com/w3c/pwpub",
+  				  branch: "master"
+
+   			    },
+				// otherLinks: [
+				// 	{
+				// 		key: "Repository",
+				// 		data: [{
+				// 			value: "Github Repository",
+				// 			href: "https://github.com/w3c/pwpub"
+				// 		}]
+				// 	},
+				// 	{
+				// 		key: "Changes",
+				// 		data: [
+				// 		// {
+				// 		//	 value: "Diff to previous version",
+				// 		//	 href: "diff.html"
+				// 		// },
+				// 		{
+				// 			value: "Commit history",
+				// 			href: "https://github.com/w3c/pwpub/commits/master"
+				// 		}]
+				// 	}
+				// ],
 				localBiblio: biblio
 			};
 		</script>
