@@ -90,6 +90,50 @@
 				<dd><p>...</p></dd>
 			</dl>
 		</section>
+
+		<section id="descriptiveproperties">
+			<h2>Descriptive Properties</h2>
+
+			<p class="issue" data-number="10">A Web Publication is anticipated to have some <a href="https://w3c.github.io/wpub/#infoset-meta">Descriptive Properties</a>, or WP-specific metadata. What PWP-specific metadata should a PWP contain, if any?</p>
+
+		</section>
+
+		<section id="packaging">
+			<h2>Packaging</h2>
+
+			<div class="ednote">
+				<p>PWP will require the selection of some sort of packaging format in order to be a
+				<strong>Packaged</strong> Web Publication.</p>
+
+				<p>Some options currently under consideration include, but are not limited to:</p>
+
+				<ul>
+					<li>Web Packaging (<a href="https://github.com/WICG/webpackage">WICG Web Packaging Format</a>, <a href="https://wicg.github.io/webpackage/" rel="nofollow">J. Yasskin's drafts</a>, and <a href="https://github.com/WICG/webpackage/blob/master/explainer.md">Web Packaging Format Explainer</a>)</li>
+					<li>EPUB Open Container Format (OCF) 3.1 <a href="https://www.w3.org/Submission/2017/SUBM-epub-ocf-20170125/" rel="nofollow">W3C Member Submission</a></li>
+					<li>Zip/OCF</li>
+					<li>Concise Binary Object Representation (CBOR) <a href="https://tools.ietf.org/html/rfc7049" rel="nofollow">RFC7049</a></li>
+					<li><a href="https://sqlite.org/" rel="nofollow">SQLite</a></li>
+				</ul>
+
+				<p>All of these have pros and cons. For example, Web Packaging is not finalised,
+				the CBOR specification precludes inclusion of a general compression scheme (although
+				one could add one on top of CBOR), and SQLite is not a standard of a recognised body.</p>
+			</div>
+
+			<p class="issue" data-number="11">What packaging format or style should a PWP use?</p>
+
+		</section>
+
+		<section id="profiles">
+			<h2>Profiles</h2>
+
+			<p class="ednote">The editors realise that the concept of profiles of implementation is probably contentious.
+			Much discussion is anticipated before this section is likely to be brought to conclusion.</p>
+
+			<p class="issue" data-number="12">How should conformance with this specification be defined? Should implementations be allowed to partially conform in terms of a &quot;profile&quot; of PWP?</p>
+
+		</section>
+
 		<section id="ack" data-include="https://w3c.github.io/wpub/common/html/acknowledgements.html" data-include-replace="true"></section>
 	</body>
 </html>
