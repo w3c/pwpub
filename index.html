@@ -74,24 +74,43 @@
 		</section>
 
 		<section id="conformance">
+			
 			<section>
-				<h2>Conformance Classes</h2>
-
-				<p id="wp-conformance">A Packaged Web Publication conforms to this specification if it meets the following criteria:</p>
-
+				<h2>General Conformance</h2>
+				
+				<p>A conforming <a>Packaged Web Publication</a>:
+					
 				<ul>
 					<li>it MUST conform to [WPUB];</li>
 					<li>it MUST contain all resources that are part of the publication (e.g. reading order and secondary resources);</li>
 				</ul>
-
-				<p>Additionally, a conforming Packaged Web Publication:
+				
+				<p>Additionally, a conforming <a>Packaged Web Publication</a>:
 
 				<ul>
                                         <li>MAY contain additional resources that are referenced by the publication (for example a metadata record in a different format);</li>
                                         <li>MAY contain the request & response HTTP payloads for each resource;</li>
-                                </ul>
+                                </ul>	
+			</section>
+			
+			<section>
+				<h2>Conformance Classes</h2>
+				
+				<p>This specification defines two conformance classes: one for <a>Self-Packaged Web Publications</a> and one for
+				<a>Standard-Packaged Web Publications</a>.</p>
 
-				<p class="ednote">Conformance is likely to be split into two conformance classes: One would allow for a particular profile to conform to Descriptive Properties requirements, but choose its own packaging format. The other, &quot;full&quot; conformance, would require a profile to comply with both Descriptive Properties and Packaging requirements.</p>
+				<p id="selfpwp-conformance">A <a>Self-Packaged Web Publication</a> conforms to this specification if it meets the following criteria:</p>
+
+				<ul>
+					<li>it conforms to <a href="#descriptiveproperties"></a> but not <a href="#packaging"></a>; that is, it specifies
+					its own packaging format.</li>
+				</ul>
+				
+				<p id="stdpwp-conformance">A <a>Standard-Packaged Web Publications</a> conforms to this specification if it meets the following criteria:</p>
+
+				<ul>
+					<li>it conforms to <a href="#descriptiveproperties"></a> and <a href="#packaging"></a>.</li>
+				</ul>
 
 			</section>
 		</section>
@@ -103,6 +122,18 @@
 				<dt><dfn data-lt="Packaged Web Publications|Packaged Web Publication's">Packaged Web Publication</dfn></dt>
 				<dd>
 					<p>A Web Publication [WPUB] that has been packaged into a single information resource, enabling it to be transported and stored independent of any specific address or protocol. A Packaged Web Publication does not have to originate on the Web (i.e., have a specific URL that is accessible via HTTP); the only requirement is that it conform to Web Publications. Similarly, it is possible to unpack a Packaged Web Publication to create a Web Publication, but there are practical limitations to doing so (e.g., re-publishing cross-domain resources will require that a client be able to access all domains used).
+					</p>
+				</dd>
+				
+				<dt><dfn data-lt="Self-Packaged Web Publications|Self-Packaged Web Publication's">Self-Packaged Web Publication</dfn></dt>
+				<dd>
+					<p>A Packaged Web Publication [PWPUB] that defines its own package format.
+					</p>
+				</dd>
+				
+				<dt><dfn data-lt="Standard-Packaged Web Publications|Standard-Packaged Web Publication's">Standard-Packaged Web Publication</dfn></dt>
+				<dd>
+					<p>A Packaged Web Publication [PWPUB] that is packaged using the packaging format defined in <a href="#packaging"></a>.
 					</p>
 				</dd>
 			</dl>
