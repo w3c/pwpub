@@ -5,12 +5,13 @@
 		<title>Packaged Web Publications</title>
 		<script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove" refer></script>
 		<script src="https://w3c.github.io/wpub/common/js/biblio.js"></script>
-		<link href="https://w3c.github.io/wpub/common/css/common.css" rel="stylesheet" type="text/css" />
+		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
 		<script class="remove">
 			var respecConfig = {
 				wg: "Publishing Working Group",
 				specStatus: "ED",
 				shortName: "pwpub",
+				noRecTrack: false,
 				// edDraftURI: "https://w3c.github.io/pwpub/",
 				editors: [
 					{
@@ -86,11 +87,11 @@
 				<p>A document is a <a>Packaged Web Publication</a> if it:
 					
 				<ul>
-					<li>conforms to [WPUB];</li>
+					<li>conforms to [[wpub]];</li>
 					<li>contains all resources that are part of the publication (e.g. reading order and secondary resources);</li>
 				</ul>
 				
-				<p>Additionally, a document is that is a <a>Packaged Web Publication</a> MAY contain:
+				<p>Additionally, a document that is a <a>Packaged Web Publication</a> MAY contain:
 
 				<ul>
                                         <li>additional resources that are referenced by the publication (for example a metadata record in a different format);</li>
@@ -126,19 +127,20 @@
 			<dl>
 				<dt><dfn data-lt="Packaged Web Publications|Packaged Web Publication's">Packaged Web Publication</dfn></dt>
 				<dd>
-					<p>A Web Publication [WPUB] that has been packaged into a single information resource, enabling it to be transported and stored independent of any specific address or protocol. A Packaged Web Publication does not have to originate on the Web (i.e., have a specific URL that is accessible via HTTP); the only requirement is that it conform to Web Publications. Similarly, it is possible to unpack a Packaged Web Publication to create a Web Publication, but there are practical limitations to doing so (e.g., re-publishing cross-domain resources will require that a client be able to access all domains used).
+
+					<p>A <a class="externalDFN" href="https://www.w3.org/TR/wpub/##dfn-web-publications">Web Publication</a>&nbsp;[[wpub]] that has been packaged into a single information resource, enabling it to be transported and stored independent of any specific address or protocol. A Packaged Web Publication does not have to originate on the Web (i.e., have a specific URL that is accessible via HTTP); the only requirement is that it conform to Web Publications. Similarly, it is possible to unpack a Packaged Web Publication to create a Web Publication, but there are practical limitations to doing so (e.g., re-publishing cross-domain resources will require that a client be able to access all domains used).
 					</p>
 				</dd>
 				
 				<dt><dfn data-lt="Self-Packaged Web Publications|Self-Packaged Web Publication's">Self-Packaged Web Publication</dfn></dt>
 				<dd>
-					<p>A Packaged Web Publication [PWPUB] that defines its own package format.
+					<p>A <a>Packaged Web Publication</a> [PWPUB] that defines its own package format.
 					</p>
 				</dd>
 				
 				<dt><dfn data-lt="Standard-Packaged Web Publications|Standard-Packaged Web Publication's">Standard-Packaged Web Publication</dfn></dt>
 				<dd>
-					<p>A Packaged Web Publication [PWPUB] that is packaged using the packaging format defined in <a href="#packaging"></a>.
+					<p>A <a>Packaged Web Publication</a> [PWPUB] that is packaged using the packaging format defined in <a href="#packaging"></a>.
 					</p>
 				</dd>
 			</dl>
@@ -169,9 +171,9 @@
 					<li><a href="https://sqlite.org/" rel="nofollow">SQLite</a></li>
 				</ul>
 
-				<p>All of these have pros and cons. For example, Web Packaging is not finalised,
+				<p>All of these have pros and cons. For example, Web Packaging is not finalized,
 				the CBOR specification precludes inclusion of a general compression scheme (although
-				one could add one on top of CBOR), and SQLite is not a standard of a recognised body.</p>
+				one could add one on top of CBOR), and SQLite is not a standard of a recognized body.</p>
 			</div>
 
 			<p class="issue" data-number="11">What packaging format or style should a PWP use?</p>
@@ -181,9 +183,20 @@
 		<section id="profiles">
 			<h2>Profiles</h2>
 
-			<p class="ednote">The editors realise that the concept of profiles of implementation is probably contentious.
+			<p class="ednote">The editors realize that the concept of profiles of implementation is probably contentious.
 			Much discussion is anticipated before this section is likely to be brought to conclusion.</p>
 
+		</section>
+
+		<section id="security">
+			<h2>Security</h2>
+
+			<div class="ednote">Placeholder for security issues.</div>
+		</section>
+		<section id="privacy">
+			<h2>Privacy</h2>
+
+			<div class="ednote">Placeholder for privacy issues.</div>
 		</section>
 
 		<section id="ack" data-include="https://w3c.github.io/wpub/common/html/acknowledgements.html" data-include-replace="true"></section>
