@@ -7,7 +7,7 @@ branches:
 env:
   global:
     - URL="https://rawgit.com/w3c/pwpub/publish_wd/snapshot/ECHIDNA"
-    - DECISION="@@@@"
+    - DECISION="https://www.w3.org/publishing/groups/publ-wg/Meetings/Minutes/2017/2017-12-18-minutes#resolution2"
     - secure: "@@@@"
  
 script:
