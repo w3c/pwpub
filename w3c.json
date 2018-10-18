@@ -1,5 +1,10 @@
- {
-    "group":      ["100074"]
-,   "contacts":   ["iherman"]
-,   "shortName":  "pwpub"
+{
+  "group": [
+    "100074"
+  ],
+  "contacts": [
+    "iherman"
+  ],
+  "shortName": "pwpub",
+  "repo-type": "rec-track"
 }
