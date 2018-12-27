@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+	<head>
+		<meta charset="utf-8" />
+		<title>Packaged Web Publication Format (PWP) 1.0</title>
+		<script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"></script>
+		<script src="common/js/biblio.js" class="remove"></script>
+		<script src="common/js/dfn-crossref.js" class="remove"></script>
+		<script src="common/js/confreq-permalinks.js" class="remove"></script>
+		<script src="common/js/copyright.js" class="remove"></script>
+		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
+		<script class="remove">
+          var respecConfig = {
+              wg: "Publishing Working Group",
+              wgURI: "https://www.w3.org/groups/publ-wg/",
+              wgPublicList: "public-publ-wg",
+              specStatus: "WORKING-DRAFT",
+              noRecTrack: true,
+              shortName: "ocf-wpub",
+              prevRecURI: "",
+              edDraftURI: "",
+              copyrightStart: "2018",
+              editors: [
+              	{
+              		name: "Laurent Le Meur",
+              		company: "EDRLab",
+              		companyURL: "https://www.edrlab.org"
+              	}
+              ],
+              formerEditors: [
+								{
+									name: "Garth Conboy",
+									company: "Google",
+									companyURL: "https://www.google.com"
+								},
+								{
+									name: "James Pritchett",
+									company: "Learning Ally",
+									companyURL: "https://www.learningally.org/"
+								},
+								{
+									name: "Markus Gylling",
+									company: "International Digital Publishing Forum (IDPF)",
+									companyURL: "https://www.idpf.org"
+								}
+              ],
+              processVersion: 2018,
+              includePermalinks: true,
+              permalinkEdge:     true,
+              permalinkHide:     false,
+              diffTool:          "http://www.aptest.com/standards/htmldiff/htmldiff.pl",
+			  github:			 {
+				  repoURL: "https://github.com/w3c/pwp",
+				  branch: "master"
+			  },
+              localBiblio: biblio,
+              preProcess: [fixDefinitionCrossrefs, addConformanceLinks],
+              postProcess: [fixCopyright]
+          };
+      </script>
+	</head>
+	<body>
+		<section id="abstract">
+			<p>This specification defines a file format and processing model for encapsulating the set of related	resources that comprise a simple <a data-lt="Web Publication">Web Publication</a> into a single-file container, the <a>Web Publication Container</a>.</p>
+
+			<p>This specification defines the rules for structuring the file collection in the abstract (the "<a
+					href="#sec-abstract-container">abstract container</a>") and the rules for the representation of this
+				abstract container within a ZIP archive (the "<a href="#sec-zip-container">ZIP container</a>").</p>
+		</section>
+		<section id="sotd"></section>
+		<section id="sec-introduction">
+			<h1>Introduction</h1>
+			<p>A Web Publication Container is used:</p>
+
+				<ul>
+					<li>
+						<p>to exchange in-progress <a>Packaged Web Publications</a> between different individuals and/or
+							different organizations;</p>
+					</li>
+					<li>
+						<p>to provide Packaged Web Publications from a publisher or conversion house to the distribution or
+							sales channel; and</p>
+					</li>
+					<li>
+						<p>to deliver Packaged Web Publications to <a>Reading Systems</a> or users.</p>
+					</li>
+				</ul>
+
+			<section id="sec-terminology">
+				<h2>Terminology</h2>
+
+				<p>Terms with meanings specific to the publishing industry are capitalized in this document (e.g., "Reading
+					System"). A complete list of these <a href="epub-spec.html#sec-terminology">terms and
+						definitions</a> is provided in [[!WEBPUB1]].</p>
+
+				<p>Only the first instance of a term in a section is linked to its definition.</p>
+
+				<p>In addition, the following terminology is defined for use in this specification:</p>
+
+				<dl class="termlist">
+					<dt><dfn id="dfn-file-name" data-lt="File Names">File Name</dfn></dt>
+					<dd>
+						<p>The name of any type of file within an <a>PWP Abstract Container</a>, whether a directory or
+							a file within a directory.</p>
+					</dd>
+					<dt><dfn id="dfn-ocf-abstract-container" data-lt="PWP Abstract Containers">PWP Abstract
+							Container</dfn></dt>
+					<dd>
+						<p>The PWP Abstract Container defines a file system model for the contents of the <a
+								href="#dfn-zip-container">PWP ZIP Container</a>, as defined in <a
+								href="#sec-abstract-container"><em>PWP Abstract Container</em></a>.</p>
+					</dd>
+					<dt><dfn id="dfn-ocf-processor" data-lt="PWP Processors">PWP Processor</dfn></dt>
+					<dd>
+						<p>A software application that processes <a>PWP ZIP Containers</a> according to the requirements
+							of this specification.</p>
+					</dd>
+					<dt><dfn id="dfn-zip-container" data-lt="PWP ZIP Containers">PWP ZIP Container</dfn></dt>
+					<dd>
+						<p>The ZIP-based packaging and distribution format for EPUB Publications, as defined in <a
+								href="#sec-zip-container"><em>PWP ZIP Container</em></a>.</p>
+						<p>PWP ZIP Container and <a>EPUB Container</a> are synonymous.</p>
+					</dd>
+					<dt><dfn id="dfn-path-name" data-lt="Path Names">Path Name</dfn></dt>
+					<dd>
+						<p>For a given directory within the <a href="#sec-abstract-container">PWP Abstract
+							Container</a>, the string holding all directory <a>File Name</a> in the full path
+							concatenated together with a <code>/</code> (<code>U+002F</code>) character separating the
+							directory File Names.</p>
+						<p>For a given file within the PWP Abstract Container, the Path Name is the string holding all
+							directory File Names concatenated together with a <code>/</code> character separating the
+							directory File Names, followed by a <code>/</code> character and then the File Name of the
+							file.</p>
+					</dd>
+					<dt><dfn id="dfn-root-directory" data-lt="Root Directories">Root Directory</dfn></dt>
+					<dd>
+						<p>The root directory represents the base of the <a>PWP Abstract Container</a> file system. This
+							directory is virtual in nature: a <a>EPUB Reading System</a> might or might not generate a
+							physical root directory for the contents of the PWP Abstract Container if the contents are
+							unzipped.</p>
+					</dd>
+				</dl>
+			</section>
+
+			<section id="conformance"></section>
+
+		</section>
+		<section id="sec-ocf-conformance">
+			<h1>PWP Conformance</h1>
+
+			<section id="ocf-conformance-container">
+				<h2>Container Conformance</h2>
+
+				<ul class="conformance-list">
+					<li>
+						<p id="confreq-ocf-content-abstr">An PWP Abstract Container MUST meet the conformance
+							constraints defined in <a href="#sec-abstract-container"><em>PWP Abstract
+							Container</em></a>.</p>
+					</li>
+					<li>
+						<p id="confreq-ocf-content-zip">An PWP ZIP Container MUST meet the conformance constraints
+							defined in <a href="#sec-zip-container"><em>PWP ZIP Container</em></a>.</p>
+					</li>
+				</ul>
+
+			</section>
+
+			<section id="ocf-conformance-rs">
+				<h2>Reading System Conformance</h2>
+
+				<p>An PWP compliant <a>Reading System</a> MUST meet all of the following criteria:</p>
+
+				<ul class="conformance-list">
+					<li>
+						<p id="confreq-ocf-rs-zip">It MUST process the PWP ZIP Container in conformance with all Reading
+							System conformance constraints expressed in <a href="#sec-zip-container"><em>PWP ZIP
+									Container</em></a>.</p>
+					</li>
+					<li>
+							<p id="confreq-ocf-rs-zip">It MUST process the PWP Abstract Container in conformance with all Reading
+								System conformance constraints expressed in <a href="#sec-abstract-container"><em>PWP Abstract
+										Container</em></a>.</p>
+						</li>
+					</ul>
+
+			</section>
+
+		</section>
+		<section id="sec-abstract-container">
+			<h1>PWP Abstract Container</h1>
+
+			<section id="sec-container-file-and-dir-structure">
+				<h2>File and Directory Structure</h2>
+
+				<p>The virtual file system for the <a>PWP Abstract Container</a> MUST have a single common <a>Root
+						Directory</a> for all of the contents of the container.</p>
+
+				<p> The PWP Abstract Container MUST include a file named <code>entry.html</code> located into 
+					the Root Directory, which contains the <a>Primary Entry Page</a> of the Web Publication. The Web Publication Manifest MUST NOT be embedded in the Primary Entry Page.</p>
+	
+				<p> The PWP Abstract Container MUST include a file named <code>manifest.jsonld</code> located into 
+					the Root Directory, which contains the Web Publication Manifest.</p>
+
+					<p>Requirements for the contents of both files are described 
+						in <a href="#manifest-authored-canonical">Web Publication Manifest</a>.</p>
+
+					<p>All other files within the PWP Abstract Container MAY be in any location descendant from the Root
+					Directory.
+
+			</section>
+
+			<section id="sec-container-iri">
+				<h2>Relative IRIs for Referencing Other Components</h2>
+
+				<p>Files within the <a>PWP Abstract Container</a> MUST reference each other via relative IRI references
+					([[!RFC3987]] and [[!RFC3986]]).</p>
+
+				<aside class="example">
+					<p>The following example shows how the Web Publication Manifest <code>imanifest.jsonld</code>, 
+						which is in the same directory as the Primary Entry Page, will be referenced from an [[HTML]] <code>link</code>
+						element.</p>
+					<pre>
+&lt;link href="manifest.jsonld" rel="publication"/&gt;
+                </pre>
+				</aside>
+
+				<p>For relative IRI references, the Base IRI [[!RFC3986]] is determined by the relevant language
+					specifications for the given file formats. For example, CSS defines how relative IRI references work
+					in the context of CSS style sheets and property declarations [[!CSSSnapshot]].</p>
+
+				<div class="note">
+					<p>Some language specifications reference Requests For Comments [[RFC]] that preceded [[RFC3987]],
+						in which case the earlier RFC applies for content in that particular language.</p>
+				</div>
+
+				<p>For instance, the Base IRIs expressed within the <code>manifest.jsonld</code>
+					file use the <a>Root Directory</a> of the PWP Abstract Container as the default Base IRI.</p>
+
+				<aside class="example">
+				<p>For example, if <code>manifest.jsonld</code> has the following content:</p>
+
+				<pre aria-busy="false">
+{
+	"resources" : "illustrations/datatypes.svg",
+	…
+}
+				</pre>
+				</aside>
+
+				<p>then the path <code>illustrations/datatypes.svg</code> is relative to the root directory for the PWP
+					Abstract Container.
+
+				<p>All relative IRI references MUST resolve to resources within the PWP Abstract Container (i.e. at or
+					below the Root Directory).</p>
+
+			</section>
+
+			<section id="sec-container-filenames">
+				<h2>File Names</h2>
+
+				<div class="note">
+					<p>This section is identical to its sibling in [[!OCF32]].</p>
+				</div>
+
+
+				<p>The <a>File Name</a> restrictions described in this section are designed to allow <a>Path Names</a>
+					and File Names to be used without modification on most commonly used operating systems. This
+					specification does not specify how an <a>PWP Processor</a> that is unable to represent PWP File and
+					Path Names would compensate for this incompatibility.</p>
+
+				<p>In the context of an <a>PWP Abstract Container</a>, <span id="ocf-fn-cs">File and Path Names are case
+						sensitive</span> and MUST meet all of the following criteria:</p>
+
+				<ul class="conformance-list">
+					<li>
+						<p id="ocf-fn-encoding">File Names MUST be UTF-8 [[!Unicode]] encoded.</p>
+					</li>
+					<li>
+						<p id="ocf-fn-length">File Names MUST NOT exceed 255 bytes.</p>
+					</li>
+					<li>
+						<p id="ocf-pn-length">The Path Name for any directory or file within the PWP Abstract Container
+							MUST NOT exceed 65535 bytes.</p>
+					</li>
+					<li>
+						<p id="ocf-fn-chars">File Names MUST NOT use the following [[!Unicode]] characters, as these
+							characters might not be supported consistently across commonly-used operating systems:</p>
+						<ul>
+							<li>
+								<p>SOLIDUS: <code>/</code> (<code>U+002F</code>)</p>
+							</li>
+							<li>
+								<p>QUOTATION MARK: <code>"</code> (<code>U+0022</code>)</p>
+							</li>
+							<li>
+								<p>ASTERISK: <code>*</code> (<code>U+002A</code>)</p>
+							</li>
+							<li>
+								<p>FULL STOP as the last character: <code>.</code> (<code>U+002E</code>)</p>
+							</li>
+							<li>
+								<p>COLON: <code>:</code> (<code>U+003A</code>)</p>
+							</li>
+							<li>
+								<p>LESS-THAN SIGN: <code>&lt;</code> (<code>U+003C</code>)</p>
+							</li>
+							<li>
+								<p>GREATER-THAN SIGN: <code>&gt;</code> (<code>U+003E</code>)</p>
+							</li>
+							<li>
+								<p>QUESTION MARK: <code>?</code> (<code>U+003F</code>)</p>
+							</li>
+							<li>
+								<p>REVERSE SOLIDUS: <code>\</code> (<code>U+005C</code>)</p>
+							</li>
+							<li>
+								<p>DEL (<code>U+007F</code>)</p>
+							</li>
+							<li>
+								<p>C0 range (<code>U+0000 … U+001F</code>)</p>
+							</li>
+							<li>
+								<p>C1 range (<code>U+0080 … U+009F</code>)</p>
+							</li>
+							<li>
+								<p>Private Use Area (<code>U+E000 … U+F8FF</code>)</p>
+							</li>
+							<li>
+								<p>Non characters in Arabic Presentation Forms-A (<code>U+FDDO … U+FDEF</code>)</p>
+							</li>
+							<li>
+								<p>Specials (<code>U+FFF0 … U+FFFF</code>)</p>
+							</li>
+							<li>
+								<p>Tags and Variation Selectors Supplement (<code>U+E0000 … U+E0FFF</code>)</p>
+							</li>
+							<li>
+								<p>Supplementary Private Use Area-A (<code>U+F0000 … U+FFFFF</code>)</p>
+							</li>
+							<li>
+								<p>Supplementary Private Use Area-B (<code>U+100000 … U+10FFFF</code>)</p>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<p id="ocf-fn-cn">All File Names within the same directory MUST be unique following case
+							normalization as described in section 3.13 of [[!Unicode]].</p>
+					</li>
+					<li>
+						<p id="ocf-fn-an">All File Names within the same directory SHOULD be unique following NFC or NFD
+							normalization [[!TR15]].</p>
+					</li>
+				</ul>
+
+				<div class="note">
+					<p>Some commercial ZIP tools do not support the full Unicode range and might support only the
+						[[US-ASCII]] range for File Names. <a href="epub-spec.html#dfn-author">Authors</a> who want to
+						use ZIP tools that have these restrictions might find it is best to restrict their File Names to
+						the [[US-ASCII]] range. If the names of files cannot be preserved during the unzipping process,
+						it will be necessary to compensate for any name translation which took place when the files are
+						referenced by URI from within the content.</p>
+				</div>
+
+			</section>
+
+		</section>
+		<section id="sec-zip-container">
+			<h1>PWP ZIP Container</h1>
+
+			<section id="sec-zip-container-intro" class="informative">
+				<h2>Introduction</h2>
+
+				<p>An <a>PWP ZIP Container</a> is a physical single-file manifestation of an <a>PWP Abstract
+						Container</a>.</p>
+
+			</section>
+
+			<section id="sec-zip-container-zipreqs">
+				<h2>ZIP File Requirements</h2>
+
+				<p>An <a>PWP ZIP Container</a> uses the ZIP format as specified by [[!ZIP]], but with the following
+					constraints and clarifications:</p>
+
+				<ul class="conformance-list">
+					<li>
+						<p id="confreq-zip-abstr">The contents of the PWP ZIP Container MUST be a conforming <a
+								href="#sec-abstract-container">PWP Abstract Container</a>.</p>
+					</li>
+					<li>
+						<p id="confreq-zip-mult">PWP ZIP Containers MUST NOT use the features in the ZIP application
+							note [[!ZIP]] that allow ZIP files to be split across multiple storage media. 
+							<a href="#dfn-ocf-processor">PWP Processors</a> MUST treat any PWP files that specify that
+							the ZIP file is split across multiple storage media as being in error.</p>
+					</li>
+					<li>
+						<p id="confreq-zip-comp"> PWP ZIP Containers MUST include only stored (uncompressed) and
+							Deflate-compressed ZIP entries within the ZIP archive. PWP Processors MUST treat any PWP
+							ZIP Containers that use compression techniques other than Deflate as being in error.</p>
+					</li>
+					<li>
+						<p id="confreq-zip-64">PWP ZIP Containers MAY use the ZIP64 extensions defined as "Version 1" in
+							section V, subsection G of the ZIP application note [[!ZIP]] and SHOULD use only those
+							extensions when the content requires them. PWP Processors MUST support the ZIP64 extensions
+							defined as "Version 1".</p>
+					</li>
+					<li>
+						<p id="confreq-zip-enc">PWP ZIP Containers MUST NOT use the encryption features defined by the
+							ZIP format. PWP Processors MUST treat any PWP ZIP Containers that use encryption techniques 
+							defined by the ZIP format as being in error.</p>
+					</li>
+					<li>
+						<p id="confreq-zip-preserve">It is not a requirement that PWP Processors preserve information
+							from an PWP ZIP Container through load and save operations that is not defined within the
+							PWP Abstract Container; in particular, an PWP Processor does not have to preserve CRC
+							values, comment fields or fields that hold file system information corresponding to a
+							particular operating system (e.g., <em class="firstterm">External file attributes</em> and
+								<em class="firstterm">Extra field</em>).</p>
+					</li>
+					<li>
+						<p id="confreq-zip-utf8">PWP ZIP Containers MUST encode File System Names using UTF-8
+							[[!Unicode]].</p>
+					</li>
+				</ul>
+
+				<p>The following constraints apply to particular fields in the PWP ZIP Container archive:</p>
+
+				<ul class="conformance-list">
+					<li>
+						<p id="confreq-zip-fld-version">In the local file header table, PWP ZIP Containers MUST set the
+								<code class="literal">version needed to extract</code> fields to the values
+								<code>10</code>, <code>20</code> or <code>45</code> in order to match the maximum
+							version level needed by the given file (e.g., <code>20</code> if Deflate is needed,
+								<code>45</code> if ZIP64 is needed). PWP Processors MUST treat any other values as being
+							in error.</p>
+					</li>
+					<li>
+						<p id="confreq-zip-fld-comp">In the local file header table, PWP ZIP Containers MUST set the
+								<code class="literal">compression</code> method field to the values <code>0</code> or
+								<code>8</code>. PWP Processors MUST treat any other values as being in error.</p>
+					</li>
+					<li>
+						<p id="confreq-zip-fld-er">PWP Processors MUST treat PWP ZIP Containers with an <code>Archive
+								decryption header</code> or an <code>Archive extra data record</code> as being in
+							error.</p>
+					</li>
+				</ul>
+
+			</section>
+
+			<section id="sec-zip-container-mime">
+				<h2>PWP ZIP Container Media Type Identification</h2>
+
+				<p>The <a>PWP ZIP Container</a> MUST contain a <code>manifest.jsonld</code> file. The contents
+					of this file MUST be conforming to the [[!WEBPUB1]] specification.</p>
+
+			</section>
+
+		</section>
+
+		<section class="appendix informative" id="app-media-type">
+			<h1>The <code>application/wpub+zip</code> Media Type</h1>
+
+			<p>This appendix registers the media type <code>application/wpub+zip</code> for the Packaged Web Publication
+				Format (PWP).</p>
+
+			<p>A <a>PWP ZIP Container</a>, or <a>PWP Container</a>, file is a container technology based on the
+				[[!ZIP]] archive format. It is used to encapsulate Web Publications. PWP and its
+				related standards are maintained and defined by the World Wide Web Consortium (W3C).</p>
+
+			<dl class="variablelist">
+				<dt>MIME media type name:</dt>
+				<dd>
+					<p><code>application</code></p>
+				</dd>
+				<dt>MIME subtype name:</dt>
+				<dd>
+					<p><code>wpub+zip</code></p>
+				</dd>
+				<dt>Required parameters:</dt>
+				<dd>
+					<p>None.</p>
+				</dd>
+				<dt>Optional parameters:</dt>
+				<dd>
+					<p>None.</p>
+				</dd>
+				<dt>Encoding considerations:</dt>
+				<dd>
+					<p>PWP ZIP Container files are binary files encoded in the <a class="media-type"
+							href="https://www.iana.org/assignments/media-types/application/zip">
+							<code>application/zip</code></a> media type.</p>
+				</dd>
+				<dt>Security considerations:</dt>
+				<dd>
+					<p>All processors that read PWP ZIP Container files should rigorously check the size and validity of
+						data retrieved.</p>
+					<p>In addition, because of the various content types that can be embedded in PWP ZIP Container
+						files, <code>application/wpub+zip</code> may describe content that poses security implications
+						beyond those noted here. However, only in cases where the processor recognizes and processes the
+						additional content, or where further processing of that content is dispatched to other
+						processors, would security issues potentially arise. In such cases, matters of security would
+						fall outside the domain of this registration document.</p>
+					<p>Security considerations that apply to <code>application/zip</code> also apply to PWP ZIP
+						Container files.</p>
+				</dd>
+				<dt>Interoperability considerations:</dt>
+				<dd>
+					<p>None.</p>
+				</dd>
+				<dt>Published specification:</dt>
+				<dd>
+					<p>This media type registration is for the Packaged Web Publication  Format (PWP), as described by the
+						Packaged Web Publication  Format (PWP) 1.0 specification located at <a
+							href="https://github.com/w3c/pwpub/spec/ocf-lite.html"
+								><code>https://github.com/w3c/pwpub/spec/ocf-lite.html</code></a>.</p>
+				</dd>
+				<dt>Applications that use this media type:</dt>
+				<dd>
+					<p>This media type will soon be in wide use for the distribution of audio and visual publications. 
+						The following	list of applications is not exhaustive.</p>
+					<ul>
+						<li></li>
+					</ul>
+				</dd>
+				<dt>Additional information:</dt>
+				<dd>
+					<dl class="variablelist">
+						<dt>Magic number(s):</dt>
+						<dd>
+							<p>0: <code>PK 0x03 0x04</code></p>
+						</dd>
+						<dt>File extension(s):</dt>
+						<dd>
+							<p>PWP ZIP Container files are most often identified with the extension
+								<code>.pwp</code>.</p>
+						</dd>
+						<dt>Macintosh file type code(s):</dt>
+						<dd>
+							<p>ZIP</p>
+						</dd>
+						<dt>Fragment identifiers:</dt>
+						<dd>
+							<p>None</p>
+						</dd>
+					</dl>
+				</dd>
+				<dt>Person &amp; email address to contact for further information:</dt>
+				<dd>
+					<p>public-publ-wg@w3.org</p>
+				</dd>
+				<dt>Intended usage:</dt>
+				<dd>
+					<p>COMMON</p>
+				</dd>
+				<dt>Author/change controller:</dt>
+				<dd>
+					<p>The published specification is a work product of the World Wide Web Consortium (W3C)’s Publishing Working Group. The W3C has change control over this specification.</p>
+				</dd>
+			</dl>
+
+		</section>
+		<div data-include="acknowledgements.html" data-oninclude="fixIncludes" data-include-replace="true"></div>
+	</body>
+</html>
