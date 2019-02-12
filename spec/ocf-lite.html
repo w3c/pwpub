@@ -3,14 +3,14 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Lightweight Packaging Format (LPF) 1.0</title>
-		<script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"></script>
+		<script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"  defer="defer"></script>
 		<script src="../common/js/biblio.js" class="remove"></script>
-		<!-- <script src="common/js/dfn-crossref.js" class="remove"></script>
-		<script src="common/js/confreq-permalinks.js" class="remove"></script>
-		<script src="common/js/copyright.js" class="remove"></script> -->
-		<link href="../common/css/common.css" rel="stylesheet" type="text/css" />
+		<script src="../common/js/orcid.js" class="remove"></script>
+		<script src="../common/js/wp.js" class="remove"></script>
+		<!-- <link href="../common/css/common.css" rel="stylesheet" type="text/css" /> -->
 		<script class="remove">
           var respecConfig = {
+							postProcess: [show_orcid, create_wp],
               wg: "Publishing Working Group",
               wgURI: "https://www.w3.org/groups/publ-wg/",
               wgPublicList: "public-publ-wg",
@@ -34,13 +34,11 @@
               permalinkEdge:     true,
               permalinkHide:     false,
               diffTool:          "http://www.aptest.com/standards/htmldiff/htmldiff.pl",
-			  github:			 {
-				  repoURL: "https://github.com/w3c/pwp",
-				  branch: "master"
-			  },
-              localBiblio: biblio,
-            //   preProcess: [fixDefinitionCrossrefs, addConformanceLinks],
-            //   postProcess: [fixCopyright]
+							github:			 {
+								repoURL: "https://github.com/w3c/pwp",
+								branch: "master"
+							},
+              localBiblio: biblio
           };
       </script>
 	</head>
