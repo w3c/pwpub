@@ -4,21 +4,21 @@
 		<meta charset="utf-8" />
 		<title>Lightweight Packaging Format (LPF) 1.0</title>
 		<script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"></script>
-		<script src="common/js/biblio.js" class="remove"></script>
-		<script src="common/js/dfn-crossref.js" class="remove"></script>
+		<script src="../common/js/biblio.js" class="remove"></script>
+		<!-- <script src="common/js/dfn-crossref.js" class="remove"></script>
 		<script src="common/js/confreq-permalinks.js" class="remove"></script>
-		<script src="common/js/copyright.js" class="remove"></script>
-		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
+		<script src="common/js/copyright.js" class="remove"></script> -->
+		<link href="../common/css/common.css" rel="stylesheet" type="text/css" />
 		<script class="remove">
           var respecConfig = {
               wg: "Publishing Working Group",
               wgURI: "https://www.w3.org/groups/publ-wg/",
               wgPublicList: "public-publ-wg",
-              specStatus: "WORKING-DRAFT",
-              noRecTrack: true,
+              edDraftURI: "https://w3c.github.io/pwpub/spec/ocf-lite.html",
+              specStatus: "ED",
+              noRecTrack: false,
               shortName: "lpf",
-              prevRecURI: "",
-              edDraftURI: "",
+              // prevRecURI: "",
               copyrightStart: "2018",
               editors: [
               	{
@@ -39,14 +39,20 @@
 				  branch: "master"
 			  },
               localBiblio: biblio,
-              preProcess: [fixDefinitionCrossrefs, addConformanceLinks],
-              postProcess: [fixCopyright]
+            //   preProcess: [fixDefinitionCrossrefs, addConformanceLinks],
+            //   postProcess: [fixCopyright]
           };
       </script>
 	</head>
 	<body>
 		<section id="abstract">
 			<p>This specification defines a file format and processing model for packaging the set of related	resources that comprise a  <a data-lt="Web Publication">Web Publication</a> into a single-file container, the <a>Web Publication Lightweight Package</a>.</p>
+		</section>
+
+		<section id="sotd">
+			<p>This draft provides a draft version of a Lightweight Packaging Format for Publications. Many details are under active consideration
+				within the Publishing Working Group and are subject to change. The most prominent known issues have been
+				identified in this document and links provided to comment on them.</p>
 		</section>
 
 		<section id="sec-introduction">
@@ -72,7 +78,7 @@
 
 				<p>Terms with meanings specific to the publishing industry are capitalized in this document (e.g., "Reading
 					System"). A complete list of these <a href="epub-spec.html#sec-terminology">terms and
-						definitions</a> is provided in [[!WEBPUB1]].</p>
+						definitions</a> is provided in [[!wpub]].</p>
 
 				<p>Only the first instance of a term in a section is linked to its definition.</p>
 
@@ -134,7 +140,7 @@
 
 				<h2>ZIP File Requirements</h2>
 
-				<p>A Web Publication Lightweight Package uses the ZIP format as specified in ISO/IEC 21320-1:2015 ([[!ZIP]]).</p>
+				<p>A <dfn>Web Publication Lightweight Package</dfn> uses the ZIP format as specified in ISO/IEC 21320-1:2015 ([[!ZIP]]).</p>
 
 			</section>
 
@@ -152,7 +158,7 @@
 								which contains the <a>Web Publication Manifest</a>.</li>
 					</ul>
 	
-					<p>The contents of both files are specified in [[!WEBPUB]]</a>.</p>
+					<p>The contents of both files are specified in [[!wpub]]</a>.</p>
 
 					<p>If both <code>entry.html</code> and <code>manifest.jsonld</code> are present in the package,
 						the former MUST contain a reference to the latter, following the rules described by <a href="https://www.w3.org/TR/wpub/#wp-primary-entry-page">the definition of the PEP</a></p>
@@ -178,7 +184,7 @@
 							below the <a>Root Directory</a>).</p>
 		
 					<div class="note">
-							<p>The [[!ZIP]] specification has few constraints on the characters allowed for file and dirctory names. 
+							<p>The [[!ZIP]] specification has few constraints on the characters allowed for file and directory names. 
 								When crafting such names, authors must be careful to use characters which 
 								allow a broad interoperability among operating systems and are compatible with relative IRI references.</p>
 					</div>
@@ -196,7 +202,7 @@
 						
 					<div class="note">
 						<p>For example, CSS defines how relative IRI references work
-						in the context of CSS style sheets and property declarations [[!CSSSnapshot]].</p>
+						in the context of CSS style sheets and property declarations [[css]].</p>
 					</div>
 				
 					<p>The Base URIs expressed within the <code>manifest.jsonld</code>
