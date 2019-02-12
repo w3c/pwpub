@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+	<head>
+		<meta charset="utf-8" />
+		<title>Lightweight Packaging Format (LPF) 1.0</title>
+		<script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"></script>
+		<script src="common/js/biblio.js" class="remove"></script>
+		<script src="common/js/dfn-crossref.js" class="remove"></script>
+		<script src="common/js/confreq-permalinks.js" class="remove"></script>
+		<script src="common/js/copyright.js" class="remove"></script>
+		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
+		<script class="remove">
+          var respecConfig = {
+              wg: "Publishing Working Group",
+              wgURI: "https://www.w3.org/groups/publ-wg/",
+              wgPublicList: "public-publ-wg",
+              specStatus: "WORKING-DRAFT",
+              noRecTrack: true,
+              shortName: "lpf",
+              prevRecURI: "",
+              edDraftURI: "",
+              copyrightStart: "2018",
+              editors: [
+              	{
+              		name: "Laurent Le Meur",
+              		company: "EDRLab",
+              		companyURL: "https://www.edrlab.org"
+              	}
+              ],
+              formerEditors: [
+              ],
+              processVersion: 2018,
+              includePermalinks: true,
+              permalinkEdge:     true,
+              permalinkHide:     false,
+              diffTool:          "http://www.aptest.com/standards/htmldiff/htmldiff.pl",
+			  github:			 {
+				  repoURL: "https://github.com/w3c/pwp",
+				  branch: "master"
+			  },
+              localBiblio: biblio,
+              preProcess: [fixDefinitionCrossrefs, addConformanceLinks],
+              postProcess: [fixCopyright]
+          };
+      </script>
+	</head>
+	<body>
+		<section id="abstract">
+			<p>This specification defines a file format and processing model for packaging the set of related	resources that comprise a  <a data-lt="Web Publication">Web Publication</a> into a single-file container, the <a>Web Publication Lightweight Package</a>.</p>
+		</section>
+
+		<section id="sec-introduction">
+			<h1>Introduction</h1>
+			<p>A Web Publication Lightweight Package is used:</p>
+
+				<ul>
+					<li>
+						<p>to exchange in-progress packaged <a>Web Publications</a> between different individuals and/or
+							different organizations;</p>
+					</li>
+					<li>
+						<p>to provide packaged Web Publications from a publisher or conversion house to the distribution or
+							sales channel; and</p>
+					</li>
+					<li>
+						<p>to deliver packaged Web Publications to users or <a>User Agents</a>.</p>
+					</li>
+				</ul>
+
+			<section id="sec-terminology">
+				<h2>Terminology</h2>
+
+				<p>Terms with meanings specific to the publishing industry are capitalized in this document (e.g., "Reading
+					System"). A complete list of these <a href="epub-spec.html#sec-terminology">terms and
+						definitions</a> is provided in [[!WEBPUB1]].</p>
+
+				<p>Only the first instance of a term in a section is linked to its definition.</p>
+
+				<p>In addition, the following terminology is defined for use in this specification:</p>
+
+				<dl class="termlist">
+					<dt><dfn id="dfn-file-name" data-lt="File Names">File Name</dfn></dt>
+					<dd>
+						<p>The name of any type of file or directory within a Web Publication Lightweight Package.</p>
+					</dd>
+					<dt><dfn id="dfn-file-path" data-lt="File Paths">File Path</dfn></dt>
+					<dd>
+						<p>The position of a file or directory within a Web Publication Lightweight Package, 
+							represented as string of characters in which path components, 
+							separated by the delimiting character <code>/</code> (<code>U+002F</code>), 
+							represent each directory. 
+					</dd>
+					<dt><dfn id="dfn-ocf-processor" data-lt="LPF Processors">LPF Processor</dfn></dt>
+					<dd>
+						<p>A software application that processes Web Publication Lightweight Packages according to the requirements
+							of this specification.</p>
+					</dd>
+					<dt><dfn id="dfn-package" data-lt="Packages">Package</dfn></dt>
+					<dd>
+						<p>In this specification, alias to Web Publication Lightweight Package.</p>
+					</dd>
+					<dt><dfn id="dfn-primary-entry-page">Primary Entry Page</dfn></dt>
+					<dd>
+						<p>(see def in the Web Publication specification).</p>
+					</dd>
+					<dt><dfn id="dfn-root-directory" data-lt="Root Directories">Root Directory</dfn></dt>
+					<dd>
+						<p>The base of the Package file system. 
+							This directory is virtual in nature: an <a>LPF Processor</a> might or might 
+							not generate a physical root directory for the contents of the 
+							Package if the contents are unzipped.</p>
+					</dd>
+					<dt><dfn id="dfn-user-agent" data-lt="User Agents">User Agent</dfn></dt>
+					<dd>
+						<p>A User Agent ...</p>
+					</dd>
+					<dt><dfn id="dfn-web-publication" data-lt="Web Publications">Web Publication</dfn></dt>
+					<dd>
+						<p>A Web Publication ...</p>
+					</dd>
+					<dt><dfn id="dfn-web-publication-manifest">Web Publication Manifest</dfn></dt>
+					<dd>
+						<p>(see def in the Web Publication specification).</p>
+					</dd>
+				</dl>
+			</section>
+
+		</section>
+
+		<section id="sec-specification">
+			<h1>Specification</h1>
+
+			<section id="sec-zip">
+
+				<h2>ZIP File Requirements</h2>
+
+				<p>A Web Publication Lightweight Package uses the ZIP format as specified in ISO/IEC 21320-1:2015 ([[!ZIP]]).</p>
+
+			</section>
+
+			<section id="sec-structure">
+		
+					<h2>File and Directory Structure</h2>
+	
+					<p>A Package MUST include at least one of the following files 
+						in its <a>Root Directory</a>:</p>
+					
+					<ul>
+						<li>A file named <code>entry.html</code>, 
+								which contains the <a>Primary Entry Page</a> of the Web Publication.</li>
+						<li>A file named <code>manifest.jsonld</code>, 
+								which contains the <a>Web Publication Manifest</a>.</li>
+					</ul>
+	
+					<p>The contents of both files are specified in [[!WEBPUB]]</a>.</p>
+
+					<p>If both <code>entry.html</code> and <code>manifest.jsonld</code> are present in the package,
+						the former MUST contain a reference to the latter, following the rules described by <a href="https://www.w3.org/TR/wpub/#wp-primary-entry-page">the definition of the PEP</a></p>
+
+					<p>All other files within the  Package MAY be in any location 
+						descendant from the <a>Root Directory</a>.</p>
+	
+			</section>
+		
+			<section id="sec-container-iri">
+
+					<h2>Relative IRIs for Referencing Other Components</h2>
+	
+					<p>Files within the Package MUST reference each other via relative IRI references, 
+						as specified in [[!RFC3987]].</p>
+						
+					<div class="note">
+							<p>Some language specifications reference Requests For Comments [[RFC]] that preceded [[RFC3987]],
+								in which case the earlier RFC applies for content in that particular language.</p>
+					</div>	
+		
+					<p>All relative IRI references MUST resolve to resources within the Package (i.e. at or
+							below the <a>Root Directory</a>).</p>
+		
+					<div class="note">
+							<p>The [[!ZIP]] specification has few constraints on the characters allowed for file and dirctory names. 
+								When crafting such names, authors must be careful to use characters which 
+								allow a broad interoperability among operating systems and are compatible with relative IRI references.</p>
+					</div>
+	
+					<aside class="example">
+						<p>The following example shows how the <a>Web Publication Manifest</a> <code>manifest.jsonld</code>
+							 is referenced from the <a>Primary Entry Page</a> via an [[HTML]] <code>link</code> element.</p>
+						<pre>
+	&lt;link href="manifest.jsonld" rel="publication"/&gt;
+						</pre>
+					</aside>
+	
+					<p>For relative IRI references, the Base URI [[!RFC3986]] is determined by the relevant language
+						specifications for the given file formats.</p>
+						
+					<div class="note">
+						<p>For example, CSS defines how relative IRI references work
+						in the context of CSS style sheets and property declarations [[!CSSSnapshot]].</p>
+					</div>
+				
+					<p>The Base URIs expressed within the <code>manifest.jsonld</code>
+						file use the <a>Root Directory</a> of the Package as the default Base URI.</p>
+			
+					<aside class="example">
+						<p>As an example, if <code>manifest.jsonld</code> has the following content:</p>
+		
+						<pre aria-busy="false">
+		{
+			"resources" : "illustrations/thorium-atom.svg",
+			…
+		}
+						</pre>	
+						<p>then the path <code>illustrations/thorium-atom.svg</code> is relative to the <a>Root Directory</a> 
+							of the Package.</p>
+					</aside>
+	
+			</section>
+	
+		</section>
+
+		<section id="sec-ua-conformance">
+			<h2>User Agent Conformance</h2>
+
+			<p>An LPF compliant <a>User Agent</a> MUST meet all of the following criteria:</p>
+
+			<ul class="conformance-list">
+				<li>
+				</li>
+				<li>
+				</li>
+			</ul>
+		</section>
+
+		<section class="appendix informative" id="app-media-type">
+			<h1>The <code>application/wpub+zip</code> Media Type</h1>
+
+			<p>This appendix registers the media type <code>application/wpub+zip</code> for the Lightweight Packaging Format (LPF).</p>
+
+			<p>A <a>Lightweight Packaging Format</a> (or LPF) file is a container technology based on the
+				[[!ZIP]] archive format. It is used to encapsulate Web Publications. 
+				LPF and its related standards are maintained and defined by the World Wide Web Consortium (W3C).</p>
+
+			<dl class="variablelist">
+				<dt>MIME media type name:</dt>
+				<dd>
+					<p><code>application</code></p>
+				</dd>
+				<dt>MIME subtype name:</dt>
+				<dd>
+					<p><code>wpub+zip</code></p>
+				</dd>
+				<dt>Required parameters:</dt>
+				<dd>
+					<p>None.</p>
+				</dd>
+				<dt>Optional parameters:</dt>
+				<dd>
+					<p>None.</p>
+				</dd>
+				<dt>Encoding considerations:</dt>
+				<dd>
+					<p>LPF files are binary files encoded in the <a class="media-type"
+							href="https://www.iana.org/assignments/media-types/application/zip">
+							<code>application/zip</code></a> media type.</p>
+				</dd>
+				<dt>Security considerations:</dt>
+				<dd>
+					<p>All processors that read LPF files should rigorously check the size and validity of
+						data retrieved.</p>
+					<p>In addition, because of the various content types that can be embedded in LPF files
+						, <code>application/wpub+zip</code> may describe content that poses security implications
+						beyond those noted here. However, only in cases where the processor recognizes and processes the
+						additional content, or where further processing of that content is dispatched to other
+						processors, would security issues potentially arise. In such cases, matters of security would
+						fall outside the domain of this registration document.</p>
+					<p>Security considerations that apply to <code>application/zip</code> also apply to LPF files.</p>
+				</dd>
+				<dt>Interoperability considerations:</dt>
+				<dd>
+					<p>None.</p>
+				</dd>
+				<dt>Published specification:</dt>
+				<dd>
+					<p>This media type registration is for the Lightweight Packaging Format (LPF), as described by the
+						Lightweight Packaging Format (LPF) 1.0 specification located at <a
+							href="https://github.com/w3c/LPFub/spec/ocf-lite.html"
+								><code>https://github.com/w3c/LPFub/spec/ocf-lite.html</code></a>.</p>
+				</dd>
+				<dt>Applications that use this media type:</dt>
+				<dd>
+					<p>This media type will soon be in wide use for the distribution of audio and visual publications. 
+						The following	list of applications is not exhaustive.</p>
+					<ul>
+						<li></li>
+					</ul>
+				</dd>
+				<dt>Additional information:</dt>
+				<dd>
+					<dl class="variablelist">
+						<dt>Magic number(s):</dt>
+						<dd>
+							<p>0: <code>PK 0x03 0x04</code></p>
+						</dd>
+						<dt>File extension(s):</dt>
+						<dd>
+							<p>LPF files are most often identified with the extension
+								<code>.lpf</code>.</p>
+						</dd>
+						<dt>Macintosh file type code(s):</dt>
+						<dd>
+							<p>ZIP</p>
+						</dd>
+						<dt>Fragment identifiers:</dt>
+						<dd>
+							<p>None</p>
+						</dd>
+					</dl>
+				</dd>
+				<dt>Person &amp; email address to contact for further information:</dt>
+				<dd>
+					<p>ivan@w3.org</p>
+				</dd>
+				<dt>Intended usage:</dt>
+				<dd>
+					<p>COMMON</p>
+				</dd>
+				<dt>Author/change controller:</dt>
+				<dd>
+					<p>The published specification is a work product of the World Wide Web Consortium (W3C)’s Publishing Working Group. The W3C has change control over this specification.</p>
+				</dd>
+			</dl>
+
+		</section>
+		<div data-include="acknowledgements.html" data-oninclude="fixIncludes" data-include-replace="true"></div>
+	</body>
+</html>
