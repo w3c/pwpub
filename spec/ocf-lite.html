@@ -153,7 +153,7 @@
 					<ul>
 						<li>A file named <code>index.html</code>, which MUST follow the requirements of the 
 								<a>Primary Entry Page</a> of the Web Publication.</li>
-						<li>A file named <code>manifest.jsonld</code>, 
+						<li>A file named <code>publication.json</code>, 
 								which MUST be in the format defined for <a>Web Publication Manifest</a>s.</li>
 					</ul>
 	
@@ -165,10 +165,10 @@
 						<li>If the Package contains an <code>index.html</code> file, 
 							the <a>Web Publication Manifest</a> is obtained following the rules 
 							described in the relevant section of the Web Publication specification [[wpub]].</li>
-						<li>Otherwise, the <code>manifest.jsonld</code> file is used as the <a>Web Publication Manifest</a>.</li>
+						<li>Otherwise, the <code>publication.json</code> file is used as the <a>Web Publication Manifest</a>.</li>
 					</ol>
 
-					<p>If both <code>index.html</code> and <code>manifest.jsonld</code> are present in the Package, then the former SHOULD contain a reference to the latter, following the rules described by the definition of the <a>Primary Entry Page</a>.</p>
+					<p>If both <code>index.html</code> and <code>publication.json</code> are present in the Package, then the former SHOULD contain a reference to the latter, following the rules described by the definition of the <a>Primary Entry Page</a>.</p>
 
 					<p>All other files within the Package MAY be in any location descendant from the Root Directory.</p>
 
@@ -195,15 +195,15 @@
 					</div>
 	
 					<aside class="example">
-						<p>In this example, the <a>Web Publication Manifest</a> <code>manifest.jsonld</code> located in the <a>Root Directory</a>  
+						<p>In this example, the <a>Web Publication Manifest</a> <code>publication.json</code> located in the <a>Root Directory</a>  
 							 is referenced from the <a>Primary Entry Page</a> via an [[HTML]] <code>link</code> element.</p>
 						<pre>
-	&lt;link href="manifest.jsonld" rel="publication"/&gt;
+	&lt;link href="publication.json" rel="publication"/&gt;
 						</pre>
 					</aside>
 				
 					<aside class="example">
-						<p>In this example, if <code>manifest.jsonld</code> is located in the <a>Root Directory</a>
+						<p>In this example, if <code>publication.json</code> is located in the <a>Root Directory</a>
 							and has the following content:</p>
 		
 						<pre aria-busy="false">
@@ -278,7 +278,7 @@
 				</dd>
 				<dt>Interoperability considerations:</dt>
 				<dd>
-					<p>Any format based on LPF, if it is implementing content encryption, MUST  use a different  
+					<p>Any format based on LPF, if using content encryption, MUST choose a different  
 							MIME media type and file extension than those defined in this specification.</p>
 				</dd>
 				<dt>Published specification:</dt>
