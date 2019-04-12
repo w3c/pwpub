@@ -169,46 +169,31 @@
 		
 			<section id="sec-container-iri">
 
-					<h2>Relative IRIs for Referencing Other Components</h2>
+					<h2>Relative URLs for Referencing Other Components</h2>
 	
-					<p>Files within the Package MUST reference each other via relative IRI references, 
-						as specified in [[!RFC3987]].</p>
-						
-					<div class="note">
-							<p>Some language specifications reference Requests For Comments [[RFC]] that preceded [[RFC3987]],
-								in which case the earlier RFC applies for content in that particular language.</p>
-					</div>	
-		
-					<p>All relative IRI references MUST resolve to resources within the Package (i.e. at or
+					<p>Files within the Package MUST reference each other via relative URLs, 
+						following the rules defined in [[wpub]].</p>
+								
+					<p>All relative URLs MUST resolve to resources within the Package (i.e. at or
 							below the <a>Root Directory</a>).</p>
 		
 					<div class="note">
 							<p>The [[!ZIP]] specification has few constraints on the characters allowed for file and directory names. 
 								When crafting such names, authors must be careful to use characters which 
-								allow a broad interoperability among operating systems and are compatible with relative IRI references.</p>
+								allow a broad interoperability among operating systems and are compatible with relative URLs.</p>
 					</div>
 	
 					<aside class="example">
-						<p>The following example shows how the <a>Web Publication Manifest</a> <code>manifest.jsonld</code>
+						<p>In this example, the <a>Web Publication Manifest</a> <code>manifest.jsonld</code> located in the <a>Root Directory</a>  
 							 is referenced from the <a>Primary Entry Page</a> via an [[HTML]] <code>link</code> element.</p>
 						<pre>
 	&lt;link href="manifest.jsonld" rel="publication"/&gt;
 						</pre>
 					</aside>
-	
-					<p>For relative IRI references, the Base URI [[!RFC3986]] is determined by the relevant language
-						specifications for the given file formats.</p>
-						
-					<div class="note">
-						<p>For example, CSS defines how relative IRI references work
-						in the context of CSS style sheets and property declarations [[css]].</p>
-					</div>
 				
-					<p>The Base URIs expressed within the <code>manifest.jsonld</code>
-						file use the <a>Root Directory</a> of the Package as the default Base URI.</p>
-			
 					<aside class="example">
-						<p>As an example, if <code>manifest.jsonld</code> has the following content:</p>
+						<p>In this example, if <code>manifest.jsonld</code> is located in the <a>Root Directory</a>
+							and has the following content:</p>
 		
 						<pre aria-busy="false">
 		{
@@ -216,8 +201,7 @@
 			…
 		}
 						</pre>	
-						<p>then the path <code>illustrations/thorium-atom.svg</code> is relative to the <a>Root Directory</a> 
-							of the Package.</p>
+						<p>then the path <code>illustrations/thorium-atom.svg</code> is relative to the <a>Root Directory</a>.</p>
 					</aside>
 	
 			</section>
