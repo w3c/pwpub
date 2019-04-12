@@ -77,7 +77,7 @@
 
 				<p>Terms with meanings specific to the publishing industry are capitalized in this document (e.g., "Reading
 					System"). A complete list of these <a href="epub-spec.html#sec-terminology">terms and
-						definitions</a> is provided in [[!wpub]].</p>
+						definitions</a> is provided in [[wpub]].</p>
 
 				<p>Only the first instance of a term in a section is linked to its definition.</p>
 
@@ -139,7 +139,7 @@
 
 				<h2>ZIP File Requirements</h2>
 
-				<p>A <dfn data-lt="Lightweight Packaging Format">Web Publication Lightweight Package</dfn> uses the ZIP format as specified in ISO/IEC 21320-1:2015 ([[!ZIP]]).</p>
+				<p>A <dfn data-lt="Lightweight Packaging Format">Web Publication Lightweight Package</dfn> uses the ZIP format as specified in ISO/IEC 21320-1:2015 ([[ZIP]]).</p>
 
 			</section>
 
@@ -151,20 +151,31 @@
 						in its <a>Root Directory</a>:</p>
 					
 					<ul>
-						<li>A file named <code>index.html</code>, 
-								which contains the <a>Primary Entry Page</a> of the Web Publication.</li>
+						<li>A file named <code>index.html</code>, which MUST follow the requirements of the 
+								<a>Primary Entry Page</a> of the Web Publication.</li>
 						<li>A file named <code>manifest.jsonld</code>, 
-								which contains the <a>Web Publication Manifest</a>.</li>
+								which MUST be in the format defined for <a>Web Publication Manifest</a>s.</li>
 					</ul>
 	
-					<p>The contents of both files are specified in [[!wpub]]</a>.</p>
+					<p>The contents of both files are specified in [[wpub]]</a>.</p>
 
-					<p>If both <code>index.html</code> and <code>manifest.jsonld</code> are present in the package,
-						the former MUST contain a reference to the latter, following the rules described by <a href="https://www.w3.org/TR/wpub/#wp-primary-entry-page">the definition of the PEP</a></p>
+					<p>The User Agent MUST obtain the <a>Web Publication Manifest</a> for the publication included in the Package through the following steps:</p>
 
-					<p>All other files within the  Package MAY be in any location 
-						descendant from the <a>Root Directory</a>.</p>
-	
+					<ol>
+						<li>If the Package contains an <code>index.html</code> file, 
+							the <a>Web Publication Manifest</a> is obtained following the rules 
+							described in the relevant section of the Web Publication specification [[wpub]].</li>
+						<li>Otherwise, the <code>manifest.jsonld</code> file is used as the <a>Web Publication Manifest</a>.</li>
+					</ol>
+
+					<p>If both <code>index.html</code> and <code>manifest.jsonld</code> are present in the Package, then the former SHOULD contain a reference to the latter, following the rules described by the definition of the <a>Primary Entry Page</a>.</p>
+
+					<p>All other files within the Package MAY be in any location descendant from the Root Directory.</p>
+
+					<div class="note">
+							<p>Note that the <code>index.html</code> page may contain an embedded manifest, i.e., the <a>Web Publication Manifest</a> may not be explicitly present in the Package.</p>
+					</div>
+
 			</section>
 		
 			<section id="sec-relative-url">
@@ -178,7 +189,7 @@
 							below the <a>Root Directory</a>).</p>
 		
 					<div class="note">
-							<p>The [[!ZIP]] specification has few constraints on the characters allowed for file and directory names. 
+							<p>The [[ZIP]] specification has few constraints on the characters allowed for file and directory names. 
 								When crafting such names, authors must be careful to use characters which 
 								allow a broad interoperability among operating systems and are compatible with relative URLs.</p>
 					</div>
@@ -227,7 +238,7 @@
 			<p>This appendix registers the media type <code>application/lpf+zip</code> for the Lightweight Packaging Format (LPF).</p>
 
 			<p>A <a>Lightweight Packaging Format</a> (or LPF) file is a container technology based on the
-				[[!ZIP]] archive format. It is used to encapsulate Web Publications. 
+				[[ZIP]] archive format. It is used to encapsulate Web Publications. 
 				LPF and its related standards are maintained and defined by the World Wide Web Consortium (W3C).</p>
 
 			<dl class="variablelist">
