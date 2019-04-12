@@ -139,7 +139,7 @@
 
 				<h2>ZIP File Requirements</h2>
 
-				<p>A <dfn data-lt="Lightweight Packaging Format">Web Publication Lightweight Package</dfn> uses the ZIP format as specified in ISO/IEC 21320-1:2015 ([[ZIP]]).</p>
+				<p>A <dfn data-lt="Lightweight Packaging Format">Web Publication Lightweight Package</dfn> uses the ZIP format as specified in ISO/IEC 21320-1:2015 ([[!zip]]).</p>
 
 			</section>
 
@@ -189,14 +189,14 @@
 							below the <a>Root Directory</a>).</p>
 		
 					<div class="note">
-							<p>The [[ZIP]] specification has few constraints on the characters allowed for file and directory names. 
+							<p>The [[!zip]] specification has few constraints on the characters allowed for file and directory names. 
 								When crafting such names, authors must be careful to use characters which 
 								allow a broad interoperability among operating systems and are compatible with relative URLs.</p>
 					</div>
 	
 					<aside class="example">
 						<p>In this example, the <a>Web Publication Manifest</a> <code>publication.json</code> located in the <a>Root Directory</a>  
-							 is referenced from the <a>Primary Entry Page</a> via an [[HTML]] <code>link</code> element.</p>
+							 is referenced from the <a>Primary Entry Page</a> via an [[!HTML]] <code>link</code> element.</p>
 						<pre>
 	&lt;link href="publication.json" rel="publication"/&gt;
 						</pre>
@@ -238,7 +238,7 @@
 			<p>This appendix registers the media type <code>application/lpf+zip</code> for the Lightweight Packaging Format (LPF).</p>
 
 			<p>A <a>Lightweight Packaging Format</a> (or LPF) file is a container technology based on the
-				[[ZIP]] archive format. It is used to encapsulate Web Publications. 
+				[[!zip]] archive format. It is used to encapsulate Web Publications. 
 				LPF and its related standards are maintained and defined by the World Wide Web Consortium (W3C).</p>
 
 			<dl class="variablelist">
