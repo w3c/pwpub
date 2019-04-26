@@ -222,14 +222,21 @@
 		<section id="sec-ua-conformance">
 			<h2>User Agent Conformance</h2>
 
-			<p>An LPF compliant <a>User Agent</a> MUST meet all of the following criteria:</p>
+			<p>An LPF compliant <a>User Agent</a> MUST meet at least one of the following criteria:</p>
 
 			<ul class="conformance-list">
-				<li>
-				</li>
-				<li>
-				</li>
+				<li>It is able to import the Package and fulfill the same requirements as a user agent processing the equivalent Web Publication, as defined in [[wpub-ucr]] ;</li>
+				<li>It is able to expose the Package as a Web Publication, as defined in [[wpub]];</li>
+				<li>It is able to convert a Package to an alternative format suitable for electronic distribution.</li>
 			</ul>
+
+			<div class="note">
+				<p>As an exemple of the first criterion: for an audiobook Package that provides a player interface, the user agent should provide the user a way to navigate to the listening position of choice. Such requirement is expressed in <a
+					href="https://w3c.github.io/dpub-pwp-ucr/#r_player-nav"
+						>Req 11</a> of the Web Publications Use Cases and Requirements.</p>
+				<p>As an exemple of the second criterion, we can expect that open-source publication servers will appear, which can access a given Package and expose a complete Web Publication, generating a <a>Primary Entry Page</a> on the fly if necessary.</p>
+				<p>As an exemple of the third criterion, we can expect that open-source publication converters will appear, which take a Package as an input and export an EPUB file as an output.</p>
+				
 		</section>
 
 		<section class="appendix informative" id="app-media-type">
@@ -283,10 +290,11 @@
 				</dd>
 				<dt>Published specification:</dt>
 				<dd>
-					<p>This media type registration is for the Lightweight Packaging Format (LPF), as described by the
+					<p>This media type registration is for the Lightweight Packaging Format (LPF), 
+						as described by the
 						Lightweight Packaging Format (LPF) 1.0 specification located at <a
-							href="https://github.com/w3c/LPFub/spec/ocf-lite.html"
-								><code>https://github.com/w3c/LPFub/spec/ocf-lite.html</code></a>.</p>
+							href="https://github.com/w3c/pwpub/spec/ocf-lite.html"
+								><code>https://github.com/w3c/pwpub/spec/ocf-lite.html</code></a>.</p>
 				</dd>
 				<dt>Applications that use this media type:</dt>
 				<dd>
