@@ -161,6 +161,15 @@
 
 					<p>If both <code>index.html</code> and <code>publication.json</code> are present in the Package, then the former SHOULD contain a reference to the latter, following the rules described by the definition of the <a>Primary Entry Page</a>.</p>
 
+					<aside class="example">
+						<p>Here, the <a>Web Publication Manifest</a> named <code>publication.json</code>, 
+							located in the <a>Root Directory</a>,  
+							is referenced from the <a>Primary Entry Page</a> via an [[HTML]] <code>link</code> element.</p>
+						<pre>
+	&lt;link href="publication.json" rel="publication"/&gt;
+						</pre>
+					</aside>
+
 					<p>All other files within the Package MAY be in any location descendant from the Root Directory.</p>
 
 					<div class="note">
@@ -184,15 +193,7 @@
 								When crafting such names, authors must be careful to use characters which 
 								allow a broad interoperability among operating systems and are compatible with relative URLs.</p>
 					</div>
-	
-					<aside class="example">
-						<p>In this example, the <a>Web Publication Manifest</a> <code>publication.json</code> located in the <a>Root Directory</a>  
-							 is referenced from the <a>Primary Entry Page</a> via an [[HTML]] <code>link</code> element.</p>
-						<pre>
-	&lt;link href="publication.json" rel="publication"/&gt;
-						</pre>
-					</aside>
-				
+					
 					<aside class="example">
 						<p>In this example, if <code>publication.json</code> is located in the <a>Root Directory</a>
 							and has the following content:</p>
