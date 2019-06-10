@@ -206,9 +206,6 @@
 
 										<li>Let <var>text</var> be the <a data-cite="!dom#concept-child-text-content"
 												>child text content</a> of <var>embedded manifest script</var></li>
-
-										<li>Let <var>base</var> be the value of <a data-cite="!dom/#dom-node-baseuri"
-												>baseURI</a> of the <code>script element</code>.</li>
 									</ol>
 								</li>
 								<li>Otherwise, terminate this algorithm.</li>
@@ -228,8 +225,7 @@
 									fails, then abort these steps. </li>
 								<li>If <var>manifest URL</var> is not a relative URL, then abort these steps. </li>
 								<li>Extract the Manifest from the Package using <var>manifest URL</var>. </li>
-								<li>Open and read the Manifest file, letting <var>response</var> be the result. </li>
-								<li>Let <var>text</var> be the result of UTF-8 decoding <var>response</var>. </li>
+								<li>Open and read the Manifest file, letting <var>text</var> be the result. </li>
 							</ol>
 							<details>
 								<summary>Explanation</summary>
@@ -242,7 +238,7 @@
 				<p>Otherwise, the Publication Manifest is obtained by parsing the
 					<code>publication.json</code> file located the <a>Root Directory</a>.</p>
 
-				<p>If both <code>index.html</code> and <code>publication.json</code> are present in the Package, then the Primary Entry Page MUST contain a reference to the <code>publication.json</code> file, following the rules defined in [[wpub]].</p>
+				<p>If both <code>index.html</code> and <code>publication.json</code> are present in the Package, then the Primary Entry Page MUST contain a reference to the <code>publication.json</code> file, following the rules defined in this section.</p>
 
 				<div class="note">
 						<p>If the Package contains an <code>index.html</code> file, 
