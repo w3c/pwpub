@@ -173,70 +173,68 @@
 	
 			</section>
 		
-			<section id="sec-processing-packages">
+			<section id="sec-obtaining-manifest">
 
-				<section id="sec-obtaining-manifest">
+				<h2>Obtaining a Publication Manifest</h2>		
 
-					<h2>Obtaining a Publication Manifest</h2>		
+				<p>The user agent MUST obtain the <a>Publication Manifest</a> through the following steps:</p>
 
-					<p>The user agent MUST obtain the <a>Publication Manifest</a> through the following steps:</p>
+				<ol>
+					<li>If the Package contains an <code>index.html</code> file in the <a>Root Directory</a>, 
+						the Publication Manifest is obtained following the processing rules 
+						described in the relevant section of the Web Publication specification [[wpub]].</li>
+					<li>Otherwise, the Publication Manifest is obtained by parsing the
+						<code>publication.json</code> file located the <a>Root Directory</a>.</li>
+				</ol>
 
-					<ol>
-						<li>If the Package contains an <code>index.html</code> file in the <a>Root Directory</a>, 
-							the Publication Manifest is obtained following the processing rules 
-							described in the relevant section of the Web Publication specification [[wpub]].</li>
-						<li>Otherwise, the Publication Manifest is obtained by parsing the
-							<code>publication.json</code> file located the <a>Root Directory</a>.</li>
-					</ol>
+				<p>If both <code>index.html</code> and <code>publication.json</code> are present in the Package, then the Primary Entry Page MUST contain a reference to the <code>publication.json</code> file, following the rules defined in [[wpub]].</p>
 
-					<p>If both <code>index.html</code> and <code>publication.json</code> are present in the Package, then the Primary Entry Page MUST contain a reference to the <code>publication.json</code> file, following the rules defined in [[wpub]].</p>
+				<div class="note">
+						<p>If the Package contains an <code>index.html</code> file, 
+							then the Publication Manifest may be embedded into the Primary Entry Page, 
+							and in such case there will be no <code>publication.json</code> file in the Package. 
+							Or the Primary Entry Page may contain a reference to a Publication Manifest file 
+							located in any location descendant from the Root Directory, and named differently from <code>publication.json</code>.</p>
+				</div>
 
-					<div class="note">
-							<p>If the Package contains an <code>index.html</code> file, 
-								then the Publication Manifest may be embedded into the Primary Entry Page, 
-								and in such case there will be no <code>publication.json</code> file in the Package. 
-								Or the Primary Entry Page may contain a reference to a Publication Manifest file 
-								located in any location descendant from the Root Directory, and named differently from <code>publication.json</code>.</p>
-					</div>
+				<aside class="example">
+					<p>Here, the <a>Publication Manifest</a> is named <code>publication.json</code>, 
+						and located in the <a>Root Directory</a>. 
+						It is simply referenced from the <a>Primary Entry Page</a> via an [[HTML]] <code>link</code> element.</p>
+					<pre>
+&lt;link href="publication.json" rel="publication"/&gt;
+					</pre>
+				</aside>
 
-					<aside class="example">
-						<p>Here, the <a>Publication Manifest</a> is named <code>publication.json</code>, 
-							and located in the <a>Root Directory</a>. 
-							It is simply referenced from the <a>Primary Entry Page</a> via an [[HTML]] <code>link</code> element.</p>
-						<pre>
-	&lt;link href="publication.json" rel="publication"/&gt;
-						</pre>
-					</aside>
+			</section>			
 
-				</section>
-						
+			<section id="sec-ua-conformance">
+				
+					<h2>User agent Conformance</h2>
+		
+					<p>A user agent conforms to this specification if it meets the following criteria:</p>
+		
+					<ul class="conformance-list">
+							<li>It is capable of exploiting the archive format and file structure from a <a href="#sec-specification">conforming Package</a>.
+							</li>
+							<li>It is capable of <a href="#sec-obtaining-manifest">obtaining a Publication Manifest</a> 
+								in a conforming Package.
+						</li>
+						<li>It is capable of processing the Manifest, as specified in <a href="https://w3c.github.io/wpub/#conformance-classes">Web Publication - Processing a Manifest</a>.
+						</li>
+						<li>It is capable of processing the Primary Entry Page, if present in the Package, as specified in <a href="https://w3c.github.io/wpub/#wp-toc-processing">Web Publication - Extacting a Table of Contents</a> and <a href="https://w3c.github.io/wpub/#wp-pagelist-processing">Web Publication - Extacting a Page List</a>.
+						</li>
+					</ul>
 			</section>
-	
+			
 		</section>
 
-		<section id="sec-ua-conformance">
-			<h2>User agent Conformance</h2>
-
-			<p>A user agent conforms to this specification if it meets the following criteria:</p>
-
-			<ul class="conformance-list">
-					<li>It is capable of exploiting the archive format and file structure from a <a href="#sec-specification">conforming Package</a>.
-					</li>
-					<li>It is capable of <a href="#sec-obtaining-manifest">obtaining a Publication Manifest</a> 
-						in a conforming Package.
-				</li>
-				<li>It is capable of processing the Manifest, as specified in <a href="https://w3c.github.io/wpub/#conformance-classes">Web Publication - Processing a Manifest</a>.
-				</li>
-				<li>It is capable of processing the Primary Entry Page, if present in the Package, as specified in <a href="https://w3c.github.io/wpub/#wp-toc-processing">Web Publication - Extacting a Table of Contents</a> and <a href="https://w3c.github.io/wpub/#wp-pagelist-processing">Web Publication - Extacting a Page List</a>.
-				</li>
-			</ul>
-		</section>
 
 		<section id="app-manifest-examples" class="appendix informative">
 			<h2>Examples</h2>
 
 			<section>
-					<h3>Simple AudiBook Manifest</h3>
+					<h3>Simple AudioBook Manifest</h3>
 	
 					<p>This example show a minimal <a>Publication Manifest</a> for an audiobook, suitable for inclusion in a package.</p>
 					<pre>
