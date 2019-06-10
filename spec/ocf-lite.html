@@ -166,15 +166,81 @@
 
 				<h2>Obtaining a Publication Manifest</h2>		
 
-				<p>The user agent MUST obtain the <a>Publication Manifest</a> through the following steps:</p>
+				<p>If the Package contains an <code>index.html</code> file in the <a>Root Directory</a>, 
+						the Publication Manifest is obtained through the following steps:</p>
 
 				<ol>
-					<li>If the Package contains an <code>index.html</code> file in the <a>Root Directory</a>, 
-						the Publication Manifest is obtained following the processing rules 
-						described in the relevant section of the Web Publication specification [[wpub]].</li>
-					<li>Otherwise, the Publication Manifest is obtained by parsing the
-						<code>publication.json</code> file located the <a>Root Directory</a>.</li>
+						<li>Extract the <a>Primary Entry page</a> from the Package (e.g. in a temporary file) and parse it.</li>
+
+						<li>If it does not have the media type <code>text/html</code> or
+								<code>application/xhtml+xml</code>, terminate this algorithm.</li>
+
+						<li>From the <code>Document</code> of the top-level browsing context of the primary entry page,
+							let <var>origin</var> be the <code>Document</code>'s origin, and <var>manifest link</var> be
+							the first <code>link</code> element in tree order in <code>Document</code> whose
+								<code>rel</code> attribute contains the <code>publication</code> token. </li>
+
+						<li>If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm. </li>
+
+						<li>If <var>manifest link</var> is <code>null</code>, terminate this algorithm. </li>
+
+						<li>If <var>manifest link</var>'s <code>href</code> attribute's value is the empty string,
+							terminate this algorithm. </li>
+
+						<li>
+							<p>If the <code>href</code> attribute value of <var>manifest link</var> is <a
+									href="https://url.spec.whatwg.org/#url-equivalence">equivalent to</a> [[!URL]]
+									<var>origin</var>:</p>
+							<ol>
+								<li>
+									<p>If it has a non-null <a data-cite="!url#concept-url-fragment">fragment</a>
+										identifying an identifier <var>id</var> in <code>Document</code>:</p>
+									<ol>
+										<li>Let <var>embedded manifest script</var> be the first <code>script</code>
+											element in tree order, whose <code>id</code> attribute is equal to
+												<var>id</var> and whose <code>type</code> attribute is equal to
+												<code>application/ld+json</code>.</li>
+
+										<li>If <var>embedded manifest script</var> is <code>null</code>, terminate this
+											algorithm.</li>
+
+										<li>Let <var>text</var> be the <a data-cite="!dom#concept-child-text-content"
+												>child text content</a> of <var>embedded manifest script</var></li>
+
+										<li>Let <var>base</var> be the value of <a data-cite="!dom/#dom-node-baseuri"
+												>baseURI</a> of the <code>script element</code>.</li>
+									</ol>
+								</li>
+								<li>Otherwise, terminate this algorithm.</li>
+							</ol>
+							<details>
+								<summary>Explanation</summary>
+								<p>This branch is in use when the manifest is embedded in the primary entry page. The
+									algorithm locates the <code>script</code> element and extract the manifest itself.
+									The document's URL or, if set by the author, the value of a possible
+										<code>base</code> element will be used to turn relative URLs into absolute
+									ones.</p>
+							</details>
+						</li>
+						<li>Otherwise: <ol>
+								<li>Let <var>manifest URL</var> be the result of parsing the value of the
+										<code>href</code> attribute, relative to the element's base URL. If parsing
+									fails, then abort these steps. </li>
+								<li>If <var>manifest URL</var> is not a relative URL, then abort these steps. </li>
+								<li>Extract the Manifest from the Package using <var>manifest URL</var>. </li>
+								<li>Open and read the Manifest file, letting <var>response</var> be the result. </li>
+								<li>Let <var>text</var> be the result of UTF-8 decoding <var>response</var>. </li>
+							</ol>
+							<details>
+								<summary>Explanation</summary>
+								<p>This branch is in use when the manifest is in a separate file. It performs the
+									standard operations to retrieve the manifest from the Package.</p>
+							</details>
+						</li>
 				</ol>
+		
+				<p>Otherwise, the Publication Manifest is obtained by parsing the
+					<code>publication.json</code> file located the <a>Root Directory</a>.</p>
 
 				<p>If both <code>index.html</code> and <code>publication.json</code> are present in the Package, then the Primary Entry Page MUST contain a reference to the <code>publication.json</code> file, following the rules defined in [[wpub]].</p>
 
@@ -210,7 +276,7 @@
 								Publication Manifest</a> in a conforming Package.
 						</li>
 						<li>It is capable of parsing the Publication Manifest, as specified 
-							in <a href="https://w3c.github.io/wpub/#manifest">Web Publications - Publication Manifest</a>.
+							in <a href="https://w3c.github.io/wpub/#manifest-lifecycle">Web Publications - ublication Manifest Lifecycle</a>.
 						</li>
 						<li>It is capable of processing the Primary Entry Page (when present in the Package), 
 							as specified in <a href="https://w3c.github.io/wpub/#wp-toc-processing">Web Publications - Extracting a Table of Contents</a> and 
@@ -238,10 +304,10 @@
 			"author"   : "Herman Melville",
 			"readBy"   : "John Doe",
 			"readingOrder" : [
-							"content/introduction.mp3",
-							"content/epigraph.mp3",
-							"content/c001.mp3",
-							&#8230;
+				"content/introduction.mp3",
+				"content/epigraph.mp3",
+				"content/c001.mp3",
+				&#8230;
 				]
 		}
 					</pre>
