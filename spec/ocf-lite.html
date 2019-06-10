@@ -151,13 +151,13 @@
 
 					<p>These resource files MAY be in any location descendant from the Root Directory.</p>
 
-					<p>Files within the Package MUST reference each other via relative URLs, resolving to resources 
+					<p>Files within the Package MUST reference each other via relative paths, resolving to resources 
 						within the Package (i.e. at or below the <a>Root Directory</a>).</p>
 		
 					<div class="note">
 							<p>The [[zip]] specification has few constraints on the characters allowed for file and directory names. 
 								When crafting such names, authors must be careful to use characters which 
-								allow a broad interoperability among operating systems and are compatible with relative URLs.</p>
+								allow a broad interoperability among operating systems and are compatible with relative paths.</p>
 					</div>
 	
 			</section>
@@ -166,21 +166,20 @@
 
 				<h2>Obtaining a Publication Manifest</h2>		
 
-				<p>If the Package contains an <code>index.html</code> file in the <a>Root Directory</a>, 
-						the Publication Manifest is obtained through the following steps:</p>
+				<p>If the Package contains a <code>publication.json</code> file 
+					located in the <a>Root Directory</a>, the Publication Manifest is obtained by opening and parsing this file.</p>
+	
+				<p>Otherwise, if the Package contains an <code>index.html</code> file in the <a>Root Directory</a>, 	the Publication Manifest is obtained through the following steps:</p>
 
 				<ol>
-						<li>Extract the <a>Primary Entry page</a> from the Package (e.g. in a temporary file) and parse it.</li>
+						<li>Let <code>Document</code> be the result of the extraction of the <code>index.html</code> file from the Package.</li>
 
 						<li>If it does not have the media type <code>text/html</code> or
 								<code>application/xhtml+xml</code>, terminate this algorithm.</li>
 
-						<li>From the <code>Document</code> of the top-level browsing context of the primary entry page,
-							let <var>origin</var> be the <code>Document</code>'s origin, and <var>manifest link</var> be
-							the first <code>link</code> element in tree order in <code>Document</code> whose
+						<li>Let <var>manifest link</var> be the first <code>link</code> element 
+							in tree order in <code>Document</code> whose
 								<code>rel</code> attribute contains the <code>publication</code> token. </li>
-
-						<li>If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm. </li>
 
 						<li>If <var>manifest link</var> is <code>null</code>, terminate this algorithm. </li>
 
@@ -188,42 +187,30 @@
 							terminate this algorithm. </li>
 
 						<li>
-							<p>If the <code>href</code> attribute value of <var>manifest link</var> is <a
-									href="https://url.spec.whatwg.org/#url-equivalence">equivalent to</a> [[!URL]]
-									<var>origin</var>:</p>
+							<p>If the <code>href</code> attribute value of <var>manifest link</var> has a non-null <a data-cite="!url#concept-url-fragment">fragment</a>
+								identifying an identifier <var>id</var> in <code>Document</code>:</p>
 							<ol>
-								<li>
-									<p>If it has a non-null <a data-cite="!url#concept-url-fragment">fragment</a>
-										identifying an identifier <var>id</var> in <code>Document</code>:</p>
-									<ol>
-										<li>Let <var>embedded manifest script</var> be the first <code>script</code>
-											element in tree order, whose <code>id</code> attribute is equal to
-												<var>id</var> and whose <code>type</code> attribute is equal to
-												<code>application/ld+json</code>.</li>
+								<li>Let <var>embedded manifest script</var> be the first <code>script</code>
+									element in tree order, whose <code>id</code> attribute is equal to
+										<var>id</var> and whose <code>type</code> attribute is equal to
+										<code>application/ld+json</code>.</li>
 
-										<li>If <var>embedded manifest script</var> is <code>null</code>, terminate this
-											algorithm.</li>
+								<li>If <var>embedded manifest script</var> is <code>null</code>, terminate this
+									algorithm.</li>
 
-										<li>Let <var>text</var> be the <a data-cite="!dom#concept-child-text-content"
-												>child text content</a> of <var>embedded manifest script</var></li>
-									</ol>
-								</li>
-								<li>Otherwise, terminate this algorithm.</li>
+								<li>Let <var>text</var> be the
+									 <a data-cite="!dom#concept-child-text-content">child text content</a> 
+									 of <var>embedded manifest script</var></li>
 							</ol>
 							<details>
-								<summary>Explanation</summary>
-								<p>This branch is in use when the manifest is embedded in the primary entry page. The
-									algorithm locates the <code>script</code> element and extract the manifest itself.
-									The document's URL or, if set by the author, the value of a possible
-										<code>base</code> element will be used to turn relative URLs into absolute
-									ones.</p>
-							</details>
+									<summary>Explanation</summary>
+									<p>This branch is in use when the manifest is embedded in the primary entry page. The
+										algorithm locates the <code>script</code> element and extract the manifest itself.</p>
+								</details>
 						</li>
 						<li>Otherwise: <ol>
-								<li>Let <var>manifest URL</var> be the result of parsing the value of the
-										<code>href</code> attribute, relative to the element's base URL. If parsing
-									fails, then abort these steps. </li>
-								<li>If <var>manifest URL</var> is not a relative URL, then abort these steps. </li>
+								<li>Let <var>manifest path</var> be the value of the <code>href</code> attribute. </li>
+								<li>If <var>manifest path</var> is not a relative path, then abort these steps. </li>
 								<li>Extract the Manifest from the Package using <var>manifest URL</var>. </li>
 								<li>Open and read the Manifest file, letting <var>text</var> be the result. </li>
 							</ol>
@@ -235,18 +222,7 @@
 						</li>
 				</ol>
 		
-				<p>Otherwise, the Publication Manifest is obtained by parsing the
-					<code>publication.json</code> file located the <a>Root Directory</a>.</p>
-
-				<p>If both <code>index.html</code> and <code>publication.json</code> are present in the Package, then the Primary Entry Page MUST contain a reference to the <code>publication.json</code> file, following the rules defined in this section.</p>
-
-				<div class="note">
-						<p>If the Package contains an <code>index.html</code> file, 
-							then the Publication Manifest may be embedded into the Primary Entry Page, 
-							and in such case there will be no <code>publication.json</code> file in the Package. 
-							Or the Primary Entry Page may contain a reference to a Publication Manifest file 
-							located in any location descendant from the Root Directory, and named differently from <code>publication.json</code>.</p>
-				</div>
+				<p>If both <code>index.html</code> and <code>publication.json</code> are present in the Package, then the Primary Entry Page SHOULD contain a reference to the <code>publication.json</code> file, following the rules defined in this section.</p>
 
 				<aside class="example">
 					<p>Here, the <a>Publication Manifest</a> is named <code>publication.json</code>, 
