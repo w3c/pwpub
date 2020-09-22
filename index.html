@@ -10,8 +10,8 @@
 			var respecConfig = {
 				specStatus: "WG-NOTE",
 				shortName: "pwpub",
-				noRecTrack: false,
-				previousPublishDate: "2017-01-04",
+				noRecTrack: true,
+				previousPublishDate: "2018-01-04",
 				previousMaturity: "WD",
 				// edDraftURI: "https://w3c.github.io/pwpub/",
 				editors: [
@@ -28,43 +28,19 @@
 				permalinkHide:     false,
 				diffTool:          "http://www.aptest.com/standards/htmldiff/htmldiff.pl",
 				group:             "publishing",
-				// wgURI:             "https://www.w3.org/publishing/groups/publ-wg/",
-				// wgPublicList:      "public-publ-wg",
-				// wgPatentURI:       "https://www.w3.org/2004/01/pp-impl/100074/status",
 				license: 		   "w3c-software-doc",
 				github:			 {
   				  repoURL: "https://github.com/w3c/pwpub",
   				  branch: "master"
 
    			    },
-				// otherLinks: [
-				// 	{
-				// 		key: "Repository",
-				// 		data: [{
-				// 			value: "Github Repository",
-				// 			href: "https://github.com/w3c/pwpub"
-				// 		}]
-				// 	},
-				// 	{
-				// 		key: "Changes",
-				// 		data: [
-				// 		// {
-				// 		//	 value: "Diff to previous version",
-				// 		//	 href: "diff.html"
-				// 		// },
-				// 		{
-				// 			value: "Commit history",
-				// 			href: "https://github.com/w3c/pwpub/commits/master"
-				// 		}]
-				// 	}
-				// ],
 				localBiblio: biblio
 			};
 		</script>
 	</head>
 	<body>
 		<section id="abstract">
-			<p>This specification defines a packaging format for combining the resources of a Web Publication [[wpub]] into a single
+			<p>This specification defines a packaging format for combining the resources of a Web Publication [[?wpub]] into a single
 				portable file.</p>
 			<p class="note">
 				At this point, this is just a skeleton for the specification-to-be. At the moment, the focus of the Working Group is on the Web Publications document.
@@ -89,7 +65,7 @@
 				<p>A document is a <a>Packaged Web Publication</a> if it:
 					
 				<ul>
-					<li>conforms to [[wpub]];</li>
+					<li>conforms to [[?wpub]];</li>
 					<li>contains all resources that are part of the publication (e.g. reading order and secondary resources);</li>
 				</ul>
 				
@@ -130,7 +106,7 @@
 				<dt><dfn data-lt="Packaged Web Publications|Packaged Web Publication's">Packaged Web Publication</dfn></dt>
 				<dd>
 
-					<p>A <a class="externalDFN" href="https://www.w3.org/TR/wpub/#dfn-web-publications">Web Publication</a>&nbsp;[[wpub]] that has been packaged into a single information resource, enabling it to be transported and stored independent of any specific address or protocol. A Packaged Web Publication does not have to originate on the Web (i.e., have a specific URL that is accessible via HTTP); the only requirement is that it conform to Web Publications. Similarly, it is possible to unpack a Packaged Web Publication to create a Web Publication, but there are practical limitations to doing so (e.g., re-publishing cross-domain resources will require that a client be able to access all domains used).
+					<p>A <a class="externalDFN" href="https://www.w3.org/TR/wpub/#dfn-web-publications">Web Publication</a>&nbsp;[[?wpub]] that has been packaged into a single information resource, enabling it to be transported and stored independent of any specific address or protocol. A Packaged Web Publication does not have to originate on the Web (i.e., have a specific URL that is accessible via HTTP); the only requirement is that it conform to Web Publications. Similarly, it is possible to unpack a Packaged Web Publication to create a Web Publication, but there are practical limitations to doing so (e.g., re-publishing cross-domain resources will require that a client be able to access all domains used).
 					</p>
 				</dd>
 				
