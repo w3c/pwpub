@@ -1,0 +1,750 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US" data-lt-installed="true"><head>
+<meta charset="utf-8">
+<meta name="generator" content="ReSpec 25.16.5">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+.issue-label{text-transform:initial}
+.warning>p:first-child{margin-top:0}
+.warning{padding:.5em;border-left-width:.5em;border-left-style:solid}
+span.warning{padding:.1em .5em .15em}
+.issue.closed span.issue-number{text-decoration:line-through}
+.warning{border-color:#f11;border-width:.2em;border-style:solid;background:#fbe9e9}
+.warning-title:before{content:"⚠";font-size:1.3em;float:left;padding-right:.3em;margin-top:-.3em}
+li.task-list-item{list-style:none}
+input.task-list-item-checkbox{margin:0 .35em .25em -1.6em;vertical-align:middle}
+.issue a.respec-gh-label{padding:5px;margin:0 2px 0 2px;font-size:10px;text-transform:none;text-decoration:none;font-weight:700;border-radius:4px;position:relative;bottom:2px;border:none;display:inline-block}
+</style>
+<style>
+dfn{cursor:pointer}
+.dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font:small Helvetica Neue,sans-serif,Droid Sans Fallback;background:#fff;color:#000;box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);border-radius:2px}
+.dfn-panel:not(.docked)>.caret{position:absolute;top:-9px}
+.dfn-panel:not(.docked)>.caret::after,.dfn-panel:not(.docked)>.caret::before{content:"";position:absolute;border:10px solid transparent;border-top:0;border-bottom:10px solid #fff;top:0}
+.dfn-panel:not(.docked)>.caret::before{border-bottom:9px solid #a2a9b1}
+.dfn-panel *{margin:0}
+.dfn-panel b{display:block;color:#000;margin-top:.25em}
+.dfn-panel ul a[href]{color:#333}
+.dfn-panel a.self-link{font-weight:700}
+.dfn-panel .dfn-exported{float:right;padding:.1em;border-radius:.2em;text-align:center;white-space:nowrap;font-size:90%;background:#d1edfd;color:#040b1c;box-shadow:0 0 0 .125em #1ca5f940}
+.dfn-panel a:not(:hover){text-decoration:none!important;border-bottom:none!important}
+.dfn-panel a[href]:hover{border-bottom-width:1px}
+.dfn-panel ul{padding:0}
+.dfn-panel li{margin-left:1em}
+.dfn-panel.docked{position:fixed;left:.5em;top:unset;bottom:2em;margin:0 auto;max-width:calc(100vw - .75em * 2 - .5em - .2em * 2);max-height:30vh;overflow:auto}
+</style>
+		
+		
+<title>Packaged Web Publications</title>
+		
+<style>
+@media print {#ghostery-purple-box {display:none !important}}
+</style>
+<style id="respec-mainstyle">
+@keyframes pop{
+0%{transform:scale(1,1)}
+25%{transform:scale(1.25,1.25);opacity:.75}
+100%{transform:scale(1,1)}
+}
+.hljs{background:0 0!important}
+a abbr,h1 abbr,h2 abbr,h3 abbr,h4 abbr,h5 abbr,h6 abbr{border:none}
+dfn{font-weight:700}
+a.internalDFN{color:inherit;border-bottom:1px solid #99c;text-decoration:none}
+a.externalDFN{color:inherit;border-bottom:1px dotted #ccc;text-decoration:none}
+a.bibref{text-decoration:none}
+.respec-offending-element:target{animation:pop .25s ease-in-out 0s 1}
+.respec-offending-element,a[href].respec-offending-element{text-decoration:red wavy underline}
+@supports not (text-decoration:red wavy underline){
+.respec-offending-element:not(pre){display:inline-block}
+.respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}
+}
+#references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
+cite .bibref{font-style:normal}
+code{color:#c63501}
+th code{color:inherit}
+a[href].orcid{padding-left:4px;padding-right:4px}
+a[href].orcid>svg{margin-bottom:-2px}
+.toc a,.tof a{text-decoration:none}
+a .figno,a .secno{color:#000}
+ol.tof,ul.tof{list-style:none outside none}
+.caption{margin-top:.5em;font-style:italic}
+table.simple{border-spacing:0;border-collapse:collapse;border-bottom:3px solid #005a9c}
+.simple th{background:#005a9c;color:#fff;padding:3px 5px;text-align:left}
+.simple th a{color:#fff;padding:3px 5px;text-align:left}
+.simple th[scope=row]{background:inherit;color:inherit;border-top:1px solid #ddd}
+.simple td{padding:3px 10px;border-top:1px solid #ddd}
+.simple tr:nth-child(even){background:#f0f6ff}
+.section dd>p:first-child{margin-top:0}
+.section dd>p:last-child{margin-bottom:0}
+.section dd{margin-bottom:1em}
+.section dl.attrs dd,.section dl.eldef dd{margin-bottom:0}
+#issue-summary>ul,.respec-dfn-list{column-count:2}
+#issue-summary li,.respec-dfn-list li{list-style:none}
+details.respec-tests-details{margin-left:1em;display:inline-block;vertical-align:top}
+details.respec-tests-details>*{padding-right:2em}
+details.respec-tests-details[open]{z-index:999999;position:absolute;border:thin solid #cad3e2;border-radius:.3em;background-color:#fff;padding-bottom:.5em}
+details.respec-tests-details[open]>summary{border-bottom:thin solid #cad3e2;padding-left:1em;margin-bottom:1em;line-height:2em}
+details.respec-tests-details>ul{width:100%;margin-top:-.3em}
+details.respec-tests-details>li{padding-left:1em}
+a[href].self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
+h2,h3,h4,h5,h6{position:relative}
+aside.example .marker>a.self-link{color:inherit}
+h2>a.self-link,h3>a.self-link,h4>a.self-link,h5>a.self-link,h6>a.self-link{border:none;color:inherit;font-size:83%;height:2em;left:-1.6em;opacity:.5;position:absolute;text-align:center;text-decoration:none;top:0;transition:opacity .2s;width:2em}
+h2>a.self-link::before,h3>a.self-link::before,h4>a.self-link::before,h5>a.self-link::before,h6>a.self-link::before{content:"§";display:block}
+@media (max-width:767px){
+dd{margin-left:0}
+h2>a.self-link,h3>a.self-link,h4>a.self-link,h5>a.self-link,h6>a.self-link{left:auto;top:auto}
+}
+@media print{
+.removeOnSave{display:none}
+}
+</style>
+		
+		
+<link href="common/css/common.css" rel="stylesheet" type="text/css">
+		
+
+<meta name="description" content="This specification defines a packaging format for combining the resources of a Web Publication [wpub] into a single
+				portable file.">
+<link rel="canonical" href="https://www.w3.org/TR/pwpub/">
+<style>
+var{position:relative;cursor:pointer}
+var[data-type]::after,var[data-type]::before{position:absolute;left:50%;top:-6px;opacity:0;transition:opacity .4s;pointer-events:none}
+var[data-type]::before{content:"";transform:translateX(-50%);border-width:4px 6px 0 6px;border-style:solid;border-color:transparent;border-top-color:#000}
+var[data-type]::after{content:attr(data-type);transform:translateX(-50%) translateY(-100%);background:#000;text-align:center;font-family:"Dank Mono","Fira Code",monospace;font-style:normal;padding:6px;border-radius:3px;color:#daca88;text-indent:0;font-weight:400}
+var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
+</style>
+<script id="initialUserConfig" type="application/json">{
+  "publishDate": "2020-10-01",
+  "specStatus": "WG-NOTE",
+  "shortName": "pwpub",
+  "noRecTrack": true,
+  "previousPublishDate": "2018-01-04",
+  "previousMaturity": "WD",
+  "editors": [
+    {
+      "name": "David Wood",
+      "url": "https://www.hyland-wood.org",
+      "company": "Invited Expert",
+      "w3cid": 36320
+    }
+  ],
+  "includePermalinks": false,
+  "permalinkEdge": true,
+  "permalinkHide": false,
+  "diffTool": "http://www.aptest.com/standards/htmldiff/htmldiff.pl",
+  "group": "publishing",
+  "license": "w3c-software-doc",
+  "github": {
+    "repoURL": "https://github.com/w3c/pwpub",
+    "branch": "master"
+  },
+  "localBiblio": {
+    "html": {
+      "title": "HTML 5.2",
+      "authors": [
+        "Steve Faulkner",
+        "Arron Eicholz",
+        "Travis Leithead",
+        "Alex Danilo",
+        "Sangwhan Moon"
+      ],
+      "date": "2017-12-14",
+      "status": "W3C Recommendation",
+      "href": "https://www.w3.org/TR/html/",
+      "publisher": "W3C"
+    },
+    "link-relation": {
+      "title": "Identifier: A Link Relation to Convey a Preferred URI for Referencing",
+      "authors": [
+        "H. Van de Sompel",
+        "M. Nelson",
+        "G. Bilder",
+        "J. Kunze",
+        "S. Warner"
+      ],
+      "rawDate": "2017-08",
+      "publisher": "IETF",
+      "href": "https://tools.ietf.org/html/draft-vandesompel-identifier-00"
+    },
+    "cfi": {
+      "authors": [
+        "Peter Sorotokin",
+        "Garth Conboy",
+        "Brady Duga",
+        "John Rivlin",
+        "Don Beaver",
+        "Kevin Ballard",
+        "Alastair Fettes",
+        "Daniel Weck"
+      ],
+      "title": "EPUB Canonical Fragment Identifiers 1.1",
+      "href": "http://www.idpf.org/epub/linking/cfi/epub-cfi.html",
+      "publisher": "IDPF",
+      "rawDate": "2017-01-05",
+      "status": "Recommended Specification"
+    },
+    "css": {
+      "title": "CSS Snapshot",
+      "authors": [
+        "Tab Atkins Jr.",
+        "Elika J. Etemad",
+        "Florian Rivoal"
+      ],
+      "status": "W3C Working Group Note",
+      "href": "https://www.w3.org/TR/CSS/",
+      "publisher": "W3C"
+    },
+    "doi": {
+      "title": "Information and documentation — Digital object identifier system",
+      "date": "2012-05",
+      "status": "Published",
+      "href": "https://www.iso.org/standard/43506.html"
+    },
+    "iana-link-relations": {
+      "title": "Link Relations",
+      "href": "https://www.iana.org/assignments/link-relations/link-relations.xhtml"
+    },
+    "wpub-ann": {
+      "title": "Web Annotation Extensions for Web Publications",
+      "href": "https://www.w3.org/TR/wpub-ann/",
+      "authors": [
+        "Timothy W. Cole",
+        "Ivan Herman"
+      ],
+      "date": "2018-01-04"
+    },
+    "pwpub": {
+      "title": "Packaged Web Publications",
+      "href": "https://www.w3.org/TR/pwpub/",
+      "authors": [
+        "David Wood"
+      ],
+      "date": "2018-01-04"
+    },
+    "wpub": {
+      "title": "Web Publications",
+      "href": "https://www.w3.org/TR/wpub/",
+      "authors": [
+        "Matt Garrish",
+        "Ivan Herman"
+      ],
+      "date": "2018-01-04",
+      "id": "wpub"
+    },
+    "string-meta": {
+      "title": "Requirements for Language and Direction Metadata in Data Formats",
+      "href": "https://w3c.github.io/string-meta/",
+      "authors": [
+        "Addison Phillips",
+        "Richard Ishida"
+      ],
+      "date": "2017-12-01"
+    },
+    "schema.org": {
+      "title": "Schema.org",
+      "href": "https://schema.org"
+    },
+    "onix": {
+      "title": "ONIX for Books",
+      "href": "http://www.editeur.org/83/Overview"
+    },
+    "bibtex": {
+      "title": "BibTeX Format Description",
+      "href": "http://www.bibtex.org/Format/"
+    }
+  },
+  "publishISODate": "2020-10-01T00:00:00.000Z",
+  "generatedSubtitle": "Working Group Note 01 October 2020"
+}</script>
+<link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WG-NOTE.css"></head>
+	<body class="h-entry"><div class="head">
+    <a class="logo" href="https://www.w3.org/"><img alt="W3C" width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C"></a> <h1 id="title" class="title">Packaged Web Publications</h1>
+    
+    <h2>
+      W3C Working Group Note
+      <time class="dt-published" datetime="2020-10-01">01 October 2020</time>
+    </h2>
+    
+    <dl>
+      <dt>This version:</dt><dd>
+              <a class="u-url" href="https://www.w3.org/TR/2020/NOTE-pwpub-20201001/">https://www.w3.org/TR/2020/NOTE-pwpub-20201001/</a>
+            </dd><dt>Latest published version:</dt><dd>
+              <a href="https://www.w3.org/TR/pwpub/">https://www.w3.org/TR/pwpub/</a>
+            </dd>
+      <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/pwpub/">https://w3c.github.io/pwpub/</a></dd>
+      
+      
+      
+      <dt>Previous version:</dt><dd><a href="https://www.w3.org/TR/2018/WD-pwpub-20180104/">https://www.w3.org/TR/2018/WD-pwpub-20180104/</a></dd>
+      
+      <dt>Editor:</dt>
+      <dd class="p-author h-card vcard" data-editor-id="36320"><a class="u-url url p-name fn" href="https://www.hyland-wood.org">David Wood</a> (Invited Expert) </dd>
+      
+      
+      <dt>Participate:</dt><dd>
+    <a href="https://github.com/w3c/pwpub/">GitHub w3c/pwpub</a>
+  </dd><dd>
+    <a href="https://github.com/w3c/pwpub/issues/">File a bug</a>
+  </dd><dd>
+    <a href="https://github.com/w3c/pwpub/commits/master">Commit history</a>
+  </dd><dd>
+    <a href="https://github.com/w3c/pwpub/pulls/">Pull requests</a>
+  </dd>
+    </dl>
+    
+    
+    
+    <p class="copyright">
+    <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    ©
+    2020
+    
+    <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+    <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="https://www.keio.ac.jp/">Keio</a>,
+    <a href="https://ev.buaa.edu.cn/">Beihang</a>). 
+    W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a rel="license" href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules
+    apply.
+  </p>
+    <hr title="Separator for header">
+  </div>
+		<section id="abstract" class="introductory"><h2>Abstract</h2>
+			<p>This specification defines a packaging format for combining the resources of a Web Publication [<cite><a class="bibref" data-link-type="biblio" href="#bib-wpub" title="Web Publications">wpub</a></cite>] into a single
+				portable file.</p>
+			<div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Note</span></div><p class="">
+				At this point, this is just a skeleton for the specification-to-be. At the moment, the focus of the Working Group is on the Web Publications document.
+			</p></div>
+		</section>
+		<section id="sotd" class="introductory"><h2>Status of This Document</h2><p><em>This section describes the status of this
+      document at the time of its publication. Other documents may supersede
+      this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision
+      of this technical report can be found in the
+      <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at
+      https://www.w3.org/TR/.</em></p>
+			<p>
+				Due to the lack of practical business cases for <a href="https://www.w3.org/TR/wpub/">Web Publications</a>, and the consequent lack of commitment to implement the technology, the <a href="https://www.w3.org/publishing/groups/publ-wg/">Publishing Working Group</a> has chosen to discontinue the work on Web Publications, archive the work in the form of a Working Group Note, and focus on other areas of interest. As a consequence, the present document has also been <a href="https://www.w3.org/2020/Process-20200915/#abandon-draft">discontinued</a> and is being published as a Working Group Note. The public record of the group's discussions is available in group's <a href="https://www.w3.org/publishing/groups/publ-wg/Meetings/Minutes/">archive of meeting minutes</a>. 
+			</p>
+				
+			<p>
+				The separate <a href="https://www.w3.org/TR/lpf/">Lightweight Packaging Format (LPF)</a> Working Group Note fulfills a similar role, albeit with different requirements and goals.
+			</p>
+		<p>
+    This document was published by the <a href="https://www.w3.org/publishing/groups/publ-wg/">Publishing Working Group</a> as a
+    Working Group Note. 
+    
+  </p><p>
+    <a href="https://github.com/w3c/pwpub/issues/">GitHub Issues</a> are preferred for
+          discussion of this specification.
+        
+    
+  </p><p>
+      Publication as a Working Group Note does not imply endorsement
+      by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership. 
+    </p><p>This is a draft document and may be updated, replaced
+  or obsoleted by other documents at any time. It is inappropriate to cite this
+  document as other than work in progress.
+  </p><p></p><p data-deliverer="100074">
+    
+        This document was produced by a group
+        operating under the
+        <a href="https://www.w3.org/Consortium/Patent-Policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent
+          Policy</a>.
+       The group does not expect this document to become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation.
+    
+    
+  </p><p>
+                  This document is governed by the
+                  <a id="w3c_process_revision" href="https://www.w3.org/2020/Process-20200915/">15 September 2020 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+                </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">2. </bdi>Conformance</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#general-conformance"><bdi class="secno">2.1 </bdi>General Conformance</a></li><li class="tocline"><a class="tocxref" href="#conformance-classes"><bdi class="secno">2.2 </bdi>Conformance Classes</a></li></ol></li><li class="tocline"><a class="tocxref" href="#terminology"><bdi class="secno">3. </bdi>Terminology</a></li><li class="tocline"><a class="tocxref" href="#descriptiveproperties"><bdi class="secno">4. </bdi>Descriptive Properties</a></li><li class="tocline"><a class="tocxref" href="#packaging"><bdi class="secno">5. </bdi>Packaging</a></li><li class="tocline"><a class="tocxref" href="#profiles"><bdi class="secno">6. </bdi>Profiles</a></li><li class="tocline"><a class="tocxref" href="#security"><bdi class="secno">7. </bdi>Security</a></li><li class="tocline"><a class="tocxref" href="#privacy"><bdi class="secno">8. </bdi>Privacy</a></li><li class="tocline"><a class="tocxref" href="#ack"><bdi class="secno">A. </bdi>Acknowledgements</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">B. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">B.1 </bdi>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">B.2 </bdi>Informative references</a></li></ol></li></ol></nav>
+
+		<section id="introduction">
+			<h2 id="x1-introduction"><bdi class="secno">1. </bdi>Introduction<a class="self-link" aria-label="§" href="#introduction"></a></h2>
+
+			<div class="note" id="issue-container-generatedID-0"><div role="heading" class="ednote-title marker" id="h-ednote" aria-level="3"><span>Editor's note</span></div><p class="">The editors request community comments on especially on Sections 2-4 via the group’s <a href="mailto:public-publ-wg@w3.org">primary mailing list</a>. The <a href="https://lists.w3.org/Archives/Public/public-publ-wg/">archives</a> are publicly visible, and anyone can post a mail.</p></div>
+
+			<div class="note" id="issue-container-generatedID-1"><div role="heading" class="ednote-title marker" id="h-ednote-0" aria-level="3"><span>Editor's note</span></div><p class="">A key decision on this specification will be the choice of packaging mechanism (section 5). The working group has decided to evaluate Web Packaging (see the <a href="https://github.com/WICG/webpackage/blob/master/explainer.md">Web Packaging Format Explainer</a>) and to wait for its maturation before proceeding. This has been a major cause of the publication of this specification as a First Public Working Draft in such skeletal form.</p></div>
+			
+		</section>
+
+		<section id="conformance"><h2 id="x2-conformance"><bdi class="secno">2. </bdi>Conformance<a class="self-link" aria-label="§" href="#conformance"></a></h2><p>As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.</p><p>
+        The key word <em class="rfc2119">MAY</em> in this document
+        is to be interpreted as described in
+        <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>
+        [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">RFC2119</a></cite>] [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8174" title="Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words">RFC8174</a></cite>]
+        when, and only when, they appear in all capitals, as shown here.
+      </p>
+			
+			<section id="general-conformance">
+				<h3 id="x2-1-general-conformance"><bdi class="secno">2.1 </bdi>General Conformance<a class="self-link" aria-label="§" href="#general-conformance"></a></h3>
+				
+				<p>A document is a <a href="#dfn-packaged-web-publications" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-packaged-web-publications-1">Packaged Web Publication</a> if it:
+					
+				</p><ul>
+					<li>conforms to [<cite><a class="bibref" data-link-type="biblio" href="#bib-wpub" title="Web Publications">wpub</a></cite>];</li>
+					<li>contains all resources that are part of the publication (e.g. reading order and secondary resources);</li>
+				</ul>
+				
+				<p>Additionally, a document that is a <a href="#dfn-packaged-web-publications" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-packaged-web-publications-2">Packaged Web Publication</a> <em class="rfc2119">MAY</em> contain:
+
+				</p><ul>
+                                        <li>additional resources that are referenced by the publication (for example a metadata record in a different format);</li>
+                                        <li>the request &amp; response HTTP payloads for each resource;</li>
+                                </ul>	
+			</section>
+			
+			<section id="conformance-classes">
+				<h3 id="x2-2-conformance-classes"><bdi class="secno">2.2 </bdi>Conformance Classes<a class="self-link" aria-label="§" href="#conformance-classes"></a></h3>
+				
+				<p>This specification defines two conformance classes: one for <a href="#dfn-self-packaged-web-publications" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-self-packaged-web-publications-1">Self-Packaged Web Publications</a> and one for
+				<a href="#dfn-standard-packaged-web-publications" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-standard-packaged-web-publications-1">Standard-Packaged Web Publications</a>.</p>
+
+				<p id="selfpwp-conformance">A document is a <a href="#dfn-self-packaged-web-publications" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-self-packaged-web-publications-2">Self-Packaged Web Publication</a> if it meets the following criteria:</p>
+
+				<ul>
+					<li>it conforms to <a href="#descriptiveproperties" class="sec-ref">§&nbsp;<bdi class="secno">4. </bdi>Descriptive Properties</a> but not <a href="#packaging" class="sec-ref">§&nbsp;<bdi class="secno">5. </bdi>Packaging</a>; that is, it specifies
+					its own packaging format.</li>
+				</ul>
+				
+				<p id="stdpwp-conformance">A document is a <a href="#dfn-standard-packaged-web-publications" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-standard-packaged-web-publications-2">Standard-Packaged Web Publications</a> if it meets the following criteria:</p>
+
+				<ul>
+					<li>it conforms to <a href="#descriptiveproperties" class="sec-ref">§&nbsp;<bdi class="secno">4. </bdi>Descriptive Properties</a> and <a href="#packaging" class="sec-ref">§&nbsp;<bdi class="secno">5. </bdi>Packaging</a>.</li>
+				</ul>
+
+			</section>
+		</section>
+
+		<section id="terminology">
+			<h2 id="x3-terminology"><bdi class="secno">3. </bdi>Terminology<a class="self-link" aria-label="§" href="#terminology"></a></h2>
+
+			<dl>
+				<dt><dfn data-lt="Packaged Web Publications|Packaged Web Publication's|Packaged Web Publication" id="dfn-packaged-web-publications">Packaged Web Publication</dfn></dt>
+				<dd>
+
+					<p>A <a class="externalDFN" href="https://www.w3.org/TR/wpub/#dfn-web-publications">Web Publication</a>&nbsp;[<cite><a class="bibref" data-link-type="biblio" href="#bib-wpub" title="Web Publications">wpub</a></cite>] that has been packaged into a single information resource, enabling it to be transported and stored independent of any specific address or protocol. A Packaged Web Publication does not have to originate on the Web (i.e., have a specific URL that is accessible via HTTP); the only requirement is that it conform to Web Publications. Similarly, it is possible to unpack a Packaged Web Publication to create a Web Publication, but there are practical limitations to doing so (e.g., re-publishing cross-domain resources will require that a client be able to access all domains used).
+					</p>
+				</dd>
+				
+				<dt><dfn data-lt="Self-Packaged Web Publications|Self-Packaged Web Publication's|Self-Packaged Web Publication" data-plurals="self-packaged web publications" id="dfn-self-packaged-web-publications">Self-Packaged Web Publication</dfn></dt>
+				<dd>
+					<p>A <a href="#dfn-packaged-web-publications" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-packaged-web-publications-3">Packaged Web Publication</a> [PWPUB] that defines its own package format.
+					</p>
+				</dd>
+				
+				<dt><dfn data-lt="Standard-Packaged Web Publications|Standard-Packaged Web Publication's|Standard-Packaged Web Publication" data-plurals="standard-packaged web publications" id="dfn-standard-packaged-web-publications">Standard-Packaged Web Publication</dfn></dt>
+				<dd>
+					<p>A <a href="#dfn-packaged-web-publications" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-packaged-web-publications-4">Packaged Web Publication</a> [PWPUB] that is packaged using the packaging format defined in <a href="#packaging" class="sec-ref">§&nbsp;<bdi class="secno">5. </bdi>Packaging</a>.
+					</p>
+				</dd>
+			</dl>
+
+		</section>
+
+		<section id="descriptiveproperties">
+			<h2 id="x4-descriptive-properties"><bdi class="secno">4. </bdi>Descriptive Properties<a class="self-link" aria-label="§" href="#descriptiveproperties"></a></h2>
+
+			<div class="issue closed" id="issue-container-number-10"><div role="heading" class="issue-title marker" id="h-issue" aria-level="3"><a href="https://github.com/w3c/pwpub/issues/10"><span class="issue-number">Issue 10</span></a><span class="issue-label" aria-label="This issue is labelled as propose closing.">: What Metadata are Specific to a PWP? <a class="respec-gh-label" href="https://github.com/w3c/pwpub/issues/?q=is%3Aissue+is%3Aopen+label%3A%22propose+closing%22" style="background-color: rgb(198, 33, 149); color: rgb(0, 0, 0);">propose closing</a></span></div><p class="">A Web Publication is anticipated to have some <a href="https://w3c.github.io/wpub/#infoset-meta">Descriptive Properties</a>, or WP-specific metadata. What PWP-specific metadata should a PWP contain, if any?</p></div>
+
+		</section>
+
+		<section id="packaging">
+			<h2 id="x5-packaging"><bdi class="secno">5. </bdi>Packaging<a class="self-link" aria-label="§" href="#packaging"></a></h2>
+
+			<div class="note" id="issue-container-generatedID-2"><div role="heading" class="ednote-title marker" id="h-ednote-1" aria-level="3"><span>Editor's note</span></div><div class="">
+				<p>PWP will require the selection of some sort of packaging format in order to be a
+				<strong>Packaged</strong> Web Publication.</p>
+
+				<p>Some options currently under consideration include, but are not limited to:</p>
+
+				<ul>
+					<li>Web Packaging (<a href="https://github.com/WICG/webpackage">WICG Web Packaging Format</a>, <a href="https://wicg.github.io/webpackage/" rel="nofollow">J. Yasskin's drafts</a>, and <a href="https://github.com/WICG/webpackage/blob/master/explainer.md">Web Packaging Format Explainer</a>)</li>
+					<li>EPUB Open Container Format (OCF) 3.1 <a href="https://www.w3.org/Submission/2017/SUBM-epub-ocf-20170125/" rel="nofollow"><abbr title="World Wide Web Consortium">W3C</abbr> Member Submission</a></li>
+					<li>Zip/OCF</li>
+					<li>Concise Binary Object Representation (CBOR) <a href="https://tools.ietf.org/html/rfc7049" rel="nofollow">RFC7049</a></li>
+					<li><a href="https://sqlite.org/" rel="nofollow">SQLite</a></li>
+				</ul>
+
+				<p>All of these have pros and cons. For example, Web Packaging is not finalized,
+				the CBOR specification precludes inclusion of a general compression scheme (although
+				one could add one on top of CBOR), and SQLite is not a standard of a recognized body.</p>
+			</div></div>
+
+			<div class="issue" id="issue-container-number-11"><div role="heading" class="issue-title marker" id="h-issue-0" aria-level="3"><a href="https://github.com/w3c/pwpub/issues/11"><span class="issue-number">Issue 11</span></a><span class="issue-label" aria-label="This issue is labelled as status:need group decision.">: What Packaging Format/Style Should a PWP Use? <a class="respec-gh-label" href="https://github.com/w3c/pwpub/issues/?q=is%3Aissue+is%3Aopen+label%3A%22status%3Aneed+group+decision%22" style="background-color: rgb(0, 107, 117); color: rgb(255, 255, 255);">status:need group decision</a></span></div><p class="">What packaging format or style should a PWP use?</p></div>
+
+		</section>
+
+		<section id="profiles">
+			<h2 id="x6-profiles"><bdi class="secno">6. </bdi>Profiles<a class="self-link" aria-label="§" href="#profiles"></a></h2>
+
+			<div class="note" id="issue-container-generatedID-3"><div role="heading" class="ednote-title marker" id="h-ednote-2" aria-level="3"><span>Editor's note</span></div><p class="">The editors realize that the concept of profiles of implementation is probably contentious.
+			Much discussion is anticipated before this section is likely to be brought to conclusion.</p></div>
+
+		</section>
+
+		<section id="security">
+			<h2 id="x7-security"><bdi class="secno">7. </bdi>Security<a class="self-link" aria-label="§" href="#security"></a></h2>
+
+			<div class="note" id="issue-container-generatedID-4"><div role="heading" class="ednote-title marker" id="h-ednote-3" aria-level="3"><span>Editor's note</span></div><div class="">Placeholder for security issues.</div></div>
+		</section>
+		<section id="privacy">
+			<h2 id="x8-privacy"><bdi class="secno">8. </bdi>Privacy<a class="self-link" aria-label="§" href="#privacy"></a></h2>
+
+			<div class="note" id="issue-container-generatedID-5"><div role="heading" class="ednote-title marker" id="h-ednote-4" aria-level="3"><span>Editor's note</span></div><div class="">Placeholder for privacy issues.</div></div>
+		</section>
+
+		<section id="ack" class="appendix informative">
+    <h2 id="a-acknowledgements"><bdi class="secno">A. </bdi>Acknowledgements<a class="self-link" aria-label="§" href="#ack"></a></h2><p><em>This section is non-normative.</em></p>
+    <p>The editors would like to thank the members of the Publishing Working Group for their contributions to this specification:</p>
+
+    <ul class="ack">
+                <li>Greg Albers (J. Paul Getty Trust)</li>
+        <li>Franco Alvarado (Macmillan Learning)</li>
+        <li>Boris Anthony (The Rebus Foundation)</li>
+        <li>Luc Audrain (Hachette Livre)</li>
+        <li>Baldur Bjarnason (The Rebus Foundation)</li>
+        <li>Laura Brady (<abbr title="World Wide Web Consortium">W3C</abbr> Invited Expert)</li>
+        <li>Steve Breault (Scenarex Inc.)</li>
+        <li>Don Brutzman (Web3D Consortium)</li>
+        <li>Kaylin Bugbee (Earth Science Data Systems Program)</li>
+        <li>Yu-Wei Chang (Taiwan Digital Publishing Forum)</li>
+        <li>Fred Chasen (<abbr title="World Wide Web Consortium">W3C</abbr> Invited Expert)</li>
+        <li>Timothy Cole (University of Illinois at Urbana-Champaign)</li>
+        <li>Simon Collinson (Rakuten, Inc.)</li>
+        <li>Rachel Comerford (Macmillan Learning)</li>
+        <li>Garth Conboy (Google, Inc., chair)</li>
+        <li>Juan Corona (Evident Point Software)</li>
+        <li>Christopher Cosner (Stanford University)</li>
+        <li>Dave Cramer (Hachette Livre)</li>
+        <li>Greg Davis (Pearson plc)</li>
+        <li>Romain Deltour (DAISY Consortium)</li>
+        <li>Marisa DeMeglio (DAISY Consortium)</li>
+        <li>Vagner Diniz (NIC.br - Brazilian Network Information Center)</li>
+        <li>Kenneth Dougherty (Pearson plc)</li>
+        <li>Brady Duga (Google, Inc.)</li>
+        <li>Ben Dugas (Rakuten, Inc.)</li>
+        <li>Roger Espinosa (University of Michigan)</li>
+        <li>Reinaldo Ferraz (NIC.br - Brazilian Network Information Center)</li>
+        <li>Heather Flanagan (RFC Editor)</li>
+        <li>Teenya Franklin (Pearson plc)</li>
+        <li>Jun Gamo (Voyager Japan, Inc.)</li>
+        <li>Michael Goodman (Wiley)</li>
+        <li>Markku Hakkinen (Educational Testing Service)</li>
+        <li>Katie Haritos-Shea (Knowbility)</li>
+        <li>Geoff Jukes (Blackstone Audio, Inc.)</li>
+        <li>Deborah Kaplan (<abbr title="World Wide Web Consortium">W3C</abbr> Invited Expert)</li>
+        <li>Bill Kasdorf (Book Industry Study Group)</li>
+        <li>George Kerscher (DAISY Consortium)</li>
+        <li>Yuri Khramov (Evident Point Software)</li>
+        <li>Masakazu Kitahara (Voyager Japan, Inc.)</li>
+        <li>Toshiaki Koike (Voyager Japan, Inc.)</li>
+        <li>Charles LaPierre (Benetech)</li>
+        <li>Mustapha Lazrek (Microsoft Corp.)</li>
+        <li>Laurent Le Meur (EDRLab)</li>
+        <li>Vladimir Levantovsky (Monotype)</li>
+        <li>Mia Lipner (Pearson plc)</li>
+        <li>Phil Madans (Hachette Livre)</li>
+        <li>Christopher Maden (University of Illinois at Urbana-Champaign)</li>
+        <li>Dmitry Markushevich (Evident Point Software)</li>
+        <li>keith mcfarland (Blackstone Audio, Inc.)</li>
+        <li>Jonathan McGlone (University of Michigan)</li>
+        <li>Hugh McGuire (The Rebus Foundation)</li>
+        <li>Nellie McKesson (<abbr title="World Wide Web Consortium">W3C</abbr> Invited Expert)</li>
+        <li>Selma Morais (NIC.br - Brazilian Network Information Center)</li>
+        <li>Jasmine Mulliken (Stanford University)</li>
+        <li>Cristina Mussinelli (Fondazione LIA)</li>
+        <li>Christos Nikolakakos (Wiley)</li>
+        <li>Gregorio Pellegrino (Fondazione LIA)</li>
+        <li>Fernando Pinto da Silva (EDRLab)</li>
+        <li>Nicholas Polys (Web3D Consortium)</li>
+        <li>Chris Powell (University of Michigan)</li>
+        <li>Jeff Printy (Macmillan Learning)</li>
+        <li>Ryan Pugatch (Hachette Livre)</li>
+        <li>Joshua Pyle (Wiley)</li>
+        <li>Wendy Reid (Rakuten, Inc., chair)</li>
+        <li>Florian Rivoal (<abbr title="World Wide Web Consortium">W3C</abbr> Invited Expert)</li>
+        <li>Leonard Rosenthol (Adobe)</li>
+        <li>Robert Sanderson (J. Paul Getty Trust)</li>
+        <li>Jodi Schneider (University of Illinois at Urbana-Champaign)</li>
+        <li>Ben Schroeter (Pearson plc)</li>
+        <li>Tzviya Siegman (Wiley, chair)</li>
+        <li>Avneesh Singh (DAISY Consortium)</li>
+        <li>Adam Sisco (Earth Science Data Systems Program)</li>
+        <li>David Stroup (Pearson plc)</li>
+        <li>Mateus Teixeira (W. W. Norton &amp; Company)</li>
+        <li>Jonathan Thurston (Pearson plc)</li>
+        <li>Yukio Tomikura (Kodansha, Publishers, Ltd.)</li>
+        <li>Ben Walters (Microsoft Corp.)</li>
+        <li>Daniel Weck (EDRLab, DAISY Consortium)</li>
+        <li>John Weise (University of Michigan)</li>
+        <li>Jason White (Educational Testing Service)</li>
+        <li>Richard Wright (EDRLab)</li>
+        <li>Jeff Xu (Rakuten, Inc.)</li>
+        <li>Evan Yamanishi (W. W. Norton &amp; Company)</li>
+        <li>Maurice York (University of Michigan)</li>
+        <li>Junichi Yoshii (Kodansha, Publishers, Ltd.)</li>
+        <li>Benjamin Young (Wiley)</li>
+        <li>Mohamed ZERGAOUI (INNOVIMAX)</li>
+    </ul>
+
+    <p>
+        The Working Group would also like to thank the members of
+        the <a href="https://www.w3.org/dpub/IG/">Digital Publishing Interest Group</a> for all the hard work
+        they did paving the road for this specification.
+    </p>
+</section>
+
+	
+
+<svg id="zcomponents__svg" style="display: none;"></svg><section id="references" class="appendix"><h2 id="b-references"><bdi class="secno">B. </bdi>References<a class="self-link" aria-label="§" href="#references"></a></h2><section id="normative-references">
+    <h3 id="b-1-normative-references"><bdi class="secno">B.1 </bdi>Normative references<a class="self-link" aria-label="§" href="#normative-references"></a></h3>
+    <dl class="bibliography"><dt id="bib-rfc2119">[RFC2119]</dt><dd><a href="https://tools.ietf.org/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a></dd><dt id="bib-rfc8174">[RFC8174]</dt><dd><a href="https://tools.ietf.org/html/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc8174">https://tools.ietf.org/html/rfc8174</a></dd></dl>
+  </section><section id="informative-references">
+    <h3 id="b-2-informative-references"><bdi class="secno">B.2 </bdi>Informative references<a class="self-link" aria-label="§" href="#informative-references"></a></h3>
+    <dl class="bibliography"><dt id="bib-wpub">[wpub]</dt><dd><a href="https://www.w3.org/TR/wpub/"><cite>Web Publications</cite></a>. Matt Garrish; Ivan Herman. 2018-01-04. URL: <a href="https://www.w3.org/TR/wpub/">https://www.w3.org/TR/wpub/</a></dd></dl>
+  </section></section><p role="navigation" id="back-to-top">
+    <a href="#title"><abbr title="Back to Top">↑</abbr></a>
+  </p><aside class="dfn-panel" hidden="" id="dfn-panel-for-dfn-packaged-web-publications">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-packaged-web-publications">Permalink</a>
+        
+      </div>
+      <b>Referenced in:</b>
+      <ul>
+    <li>
+    <a href="#ref-for-dfn-packaged-web-publications-1">2.1 General Conformance</a> <a href="#ref-for-dfn-packaged-web-publications-2">(2)</a> 
+  </li><li>
+    <a href="#ref-for-dfn-packaged-web-publications-3">3. Terminology</a> <a href="#ref-for-dfn-packaged-web-publications-4">(2)</a> 
+  </li>
+  </ul>
+    </aside><aside class="dfn-panel" hidden="" id="dfn-panel-for-dfn-self-packaged-web-publications">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-self-packaged-web-publications">Permalink</a>
+        
+      </div>
+      <b>Referenced in:</b>
+      <ul>
+    <li>
+    <a href="#ref-for-dfn-self-packaged-web-publications-1">2.2 Conformance Classes</a> <a href="#ref-for-dfn-self-packaged-web-publications-2">(2)</a> 
+  </li>
+  </ul>
+    </aside><aside class="dfn-panel" hidden="" id="dfn-panel-for-dfn-standard-packaged-web-publications">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-standard-packaged-web-publications">Permalink</a>
+        
+      </div>
+      <b>Referenced in:</b>
+      <ul>
+    <li>
+    <a href="#ref-for-dfn-standard-packaged-web-publications-1">2.2 Conformance Classes</a> <a href="#ref-for-dfn-standard-packaged-web-publications-2">(2)</a> 
+  </li>
+  </ul>
+    </aside><script id="respec-dfn-panel">(() => {
+// @ts-check
+if (document.respecIsReady) {
+  document.respecIsReady.then(dfnPanel);
+} else {
+  dfnPanel();
+}
+
+function dfnPanel() {
+  /** @type {HTMLElement} */
+  let panel;
+  document.body.addEventListener("click", event => {
+    if (!(event.target instanceof HTMLElement)) return;
+
+    /** @type {HTMLElement} */
+    const el = event.target;
+
+    const action = deriveAction(el);
+    switch (action) {
+      case "show": {
+        if (panel) hidePanel(panel);
+        /** @type {HTMLElement} */
+        const dfn = el.closest("dfn, .index-term");
+        panel = document.getElementById(`dfn-panel-for-${dfn.id}`);
+        displayPanel(dfn, panel, { x: event.clientX, y: event.clientY });
+        break;
+      }
+      case "dock": {
+        panel.style.left = null;
+        panel.style.top = null;
+        panel.classList.add("docked");
+        break;
+      }
+      case "hide": {
+        hidePanel(panel);
+        break;
+      }
+    }
+  });
+}
+
+/** @param {HTMLElement} clickTarget */
+function deriveAction(clickTarget) {
+  const hitALink = !!clickTarget.closest("a");
+  if (clickTarget.closest("dfn, .index-term")) {
+    return hitALink ? null : "show";
+  }
+  if (clickTarget.closest(".dfn-panel")) {
+    if (hitALink) {
+      const clickedSelfLink = clickTarget.classList.contains("self-link");
+      return clickedSelfLink ? "hide" : "dock";
+    }
+    const panel = clickTarget.closest(".dfn-panel");
+    return panel.classList.contains("docked") ? "hide" : null;
+  }
+  if (document.querySelector(".dfn-panel:not([hidden])")) {
+    return "hide";
+  }
+  return null;
+}
+
+/**
+ * @param {HTMLElement} dfn
+ * @param {HTMLElement} panel
+ * @param {{ x: number, y: number }} clickPosition
+ */
+function displayPanel(dfn, panel, { x, y }) {
+  panel.hidden = false;
+  // distance (px) between edge of panel and the pointing triangle (caret)
+  const MARGIN = 20;
+
+  const dfnRects = dfn.getClientRects();
+  // Find the `top` offset when the `dfn` can be spread across multiple lines
+  let closestTop = 0;
+  let minDiff = Infinity;
+  for (const rect of dfnRects) {
+    const { top, bottom } = rect;
+    const diffFromClickY = Math.abs((top + bottom) / 2 - y);
+    if (diffFromClickY < minDiff) {
+      minDiff = diffFromClickY;
+      closestTop = top;
+    }
+  }
+
+  const top = window.scrollY + closestTop + dfnRects[0].height;
+  const left = x - MARGIN;
+  panel.style.left = `${left}px`;
+  panel.style.top = `${top}px`;
+
+  // Find if the panel is flowing out of the window
+  const panelRect = panel.getBoundingClientRect();
+  const SCREEN_WIDTH = Math.min(window.innerWidth, window.screen.width);
+  if (panelRect.right > SCREEN_WIDTH) {
+    const newLeft = Math.max(MARGIN, x + MARGIN - panelRect.width);
+    const newCaretOffset = left - newLeft;
+    panel.style.left = `${newLeft}px`;
+    /** @type {HTMLElement} */
+    const caret = panel.querySelector(".caret");
+    caret.style.left = `${newCaretOffset}px`;
+  }
+}
+
+/** @param {HTMLElement} panel */
+function hidePanel(panel) {
+  panel.hidden = true;
+  panel.classList.remove("docked");
+}
+})()</script><script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script></body></html>
